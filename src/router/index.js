@@ -7,22 +7,27 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/dashboard'
+      redirect: '/introduction'
     },
     {
       path: '/',
       component: () => import(/* webpackChunkName: "home" */ '../components/common/Home.vue'),
       meta: {title: '自述文件'},
       children: [
-        {
-          path: '/dashboard',
-          component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Dashboard.vue'),
+        {// 系统首页
+          path: '/introduction',
+          component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Introduction.vue'),
           meta: {title: '系统首页'}
         },
+        {// 算法1----HiSeekerPage
+          path: '/HiSeekerPage',
+          component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/HiSeekerPage.vue'),
+          meta: {title: '算法1'}
+        },
         {
-          path: '/icon',
-          component: () => import(/* webpackChunkName: "icon" */ '../components/page/Icon.vue'),
-          meta: {title: '自定义图标'}
+          path: '/DataGeneration',
+          component: () => import(/* webpackChunkName: "icon" */ '../components/page/DataGeneration.vue'),
+          meta: {title: '数据生成界面'}
         },
         {
           path: '/table',

@@ -110,18 +110,18 @@ export default {
         },
         {
           icon: 'el-icon-rank',
-          index: 'charts',
+          index: 'MethodComparison',
           title: '算法对比界面'
         },
         {
           icon: 'el-icon-rank',
-          index: 'i18n',
+          index: 'SNPInquery',
           title: 'SNP查询界面'
         },
         {
           icon: 'el-icon-rank',
-          index: '/donate',
-          title: '用户中心界面'
+          index: 'TaskSummary',
+          title: '任务控制界面'
         }
       ]
     }

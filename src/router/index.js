@@ -24,10 +24,30 @@ export default new Router({
           component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/HiSeekerPage.vue'),
           meta: {title: '算法1'}
         },
-        {
+        {// 数据生成界面
           path: '/DataGeneration',
           component: () => import(/* webpackChunkName: "icon" */ '../components/page/DataGeneration.vue'),
           meta: {title: '数据生成界面'}
+        },
+        {// 算法对比界面
+          path: '/MethodComparison',
+          component: () => import(/* webpackChunkName: "icon" */ '../components/page/MethodComparison.vue'),
+          meta: {title: '数据生成界面'}
+        },
+        {// SNP查询界面
+          path: '/SNPInquery',
+          component: () => import(/* webpackChunkName: "icon" */ '../components/page/SNPInquery.vue'),
+          meta: {title: 'SNP查询界面'}
+        },
+        {// 任务控制界面
+          path: '/TaskSummary',
+          component: () => import(/* webpackChunkName: "icon" */ '../components/page/TaskSummary.vue'),
+          meta: {title: '任务控制界面'}
+        },
+        {// 图表类
+          path: '/BaseCharts',
+          component: () => import(/* webpackChunkName: "table" */ '../components/page/BaseCharts.vue'),
+          meta: {title: '基础表格'}
         },
         {
           path: '/table',

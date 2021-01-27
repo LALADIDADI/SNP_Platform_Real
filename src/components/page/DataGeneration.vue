@@ -127,6 +127,7 @@ export default {
     handleChange (val) {
       console.log(val)
     },
+    // 数据上传方法
     handleRemove (file, fileList) {
       console.log(file, fileList)
     },

@@ -12,7 +12,7 @@
       <div class="introduction-box">
         <el-row :gutter="20">
           <el-col :span="3" align="right"><div class="grid-content ">
-            <el-button type="primary" @click="onSubmit">SNP查询</el-button>
+            <el-button type="primary" @click="getData">SNP查询</el-button>
           </div></el-col>
           <el-col :span="6"><div class="grid-content ">
             <el-input v-model="form.name" placeholder="请输入SNP编号"></el-input>
@@ -23,7 +23,7 @@
               type="textarea"
               :rows="20"
               placeholder="信息将会在此处显示"
-              v-model="textarea">
+              v-model="form.textarea">
             </el-input>
             <div class="grid-content ">
           </div></el-col>
@@ -34,23 +34,27 @@
 </template>
 
 <script>
+import {fetchDemo} from '../../api/index'
+
 export default {
   name: 'SNPInquery',
   data () {
     return {
-      activeName: '1',
-      textarea: '',
-      pics: ['https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
-      ],
       form: {
-        name: ''
+        name: '123',
+        textarea: '现在我是初始状态'
       }
     }
   },
 
   methods: {
-    handleChange (val) {
-      console.log(val)
+    // 本地服务器获取数据
+    getData () {
+      fetchDemo(this.form).then(res => {
+        console.log(res)
+        this.form.name = res.name
+        this.form.textarea = res.textarea
+      })
     },
     onSubmit () {
       console.log('submit!')

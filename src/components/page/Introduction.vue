@@ -74,8 +74,7 @@ export default {
   data () {
     return {
       activeName: '1',
-      pics: ['https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
-      ]
+      pics: ['https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F11981132422%2F0.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1614744153&t=79514d4f045ee1eb4d6b9f2753d1e064']
     }
   },
 

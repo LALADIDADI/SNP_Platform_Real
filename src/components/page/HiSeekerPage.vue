@@ -32,52 +32,44 @@
             </el-collapse>
           </el-col>
           <el-col :span="12">
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+            <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
               <el-form-item label="参数零：" prop="param_0">
-                <el-input v-model="ruleForm.param_0" maxlength="10" show-word-limit></el-input>
+                <el-input v-model="params.param_0" maxlength="10" show-word-limit></el-input>
               </el-form-item>
               <el-form-item label="参数一：" prop="param_1">
-                <el-select v-model="ruleForm.param_1" placeholder="请选择参数">
+                <el-select v-model="params.param_1" placeholder="请选择参数">
                   <el-option label="1.0" value="value1"></el-option>
                   <el-option label="2.0" value="value2"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="参数二：" prop="param_2">
-                <el-select v-model="ruleForm.param_2" placeholder="请选择参数">
+                <el-select v-model="params.param_2" placeholder="请选择参数">
                   <el-option label="1.0" value="value1"></el-option>
                   <el-option label="2.0" value="value2"></el-option>
-                  <el-option label="2.0" value="value2"></el-option>
-                  <el-option label="2.0" value="value2"></el-option>
+                  <el-option label="3.0" value="value3"></el-option>
+                  <el-option label="4.0" value="value4"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="参数三：" prop="param_3">
-                <el-switch v-model="ruleForm.param_3"></el-switch>
+                <el-switch v-model="params.param_3"></el-switch>
               </el-form-item>
-              <el-form-item label="参数四：" prop="type">
-                <el-checkbox-group v-model="ruleForm.param_4">
-                  <el-checkbox label="Chili" name="param_4"></el-checkbox>
-                  <el-checkbox label="Vinegar" name="param_4"></el-checkbox>
-                  <el-checkbox label="Parsley" name="param_4"></el-checkbox>
-                  <el-checkbox label="Onion" name="param_4"></el-checkbox>
-                </el-checkbox-group>
-              </el-form-item>
-                <el-form-item label="上传文件" prop="data_1">
+                <el-form-item label="数据文件" prop="data_1">
                   <el-upload
                     class="upload-demo"
-                    action="https://jsonplaceholder.typicode.com/posts/"
+                    action="http://localhost:8080/uploadDemo"
+                    name="txtFile"
                     :on-preview="handlePreview"
                     :on-remove="handleRemove"
                     :before-remove="beforeRemove"
                     multiple
                     :limit="3"
-                    :on-exceed="handleExceed"
-                    :file-list="fileList">
+                    :on-exceed="handleExceed">
                     <el-button type="primary">点击上传</el-button>
-                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                    <div slot="tip" class="el-upload__tip">只能上传txt文件，且不超过500kb</div>
                   </el-upload>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">运行算法</el-button>
+                <el-button type="primary" @click="submitForm()">运行算法</el-button>
                 <el-button @click="resetForm('ruleForm')">结果下载</el-button>
                 <el-button @click="resetForm('ruleForm')">样例下载</el-button>
               </el-form-item>
@@ -90,22 +82,22 @@
 </template>
 
 <script>
+import {Method1ParamsUpload} from '../../api/index'
+
 export default {
   name: 'HiSeekerPage',
   data () {
     return {
+      // 左半部分参数
       activeName: '1',
-      pics: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-      ruleForm: {
-        param_0: '',
-        param_1: '',
-        param_2: '',
-        param_3: '',
-        param_4: [],
-        data_1: '',
-        data_2: ''
+      pics: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F11981132422%2F0.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1614744153&t=79514d4f045ee1eb4d6b9f2753d1e064',
+      // 右半部分参数
+      params: {
+        param_0: '12345',
+        param_1: '1.0',
+        param_2: '2.0',
+        param_3: true
       },
-      fileList: [{name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
       rules: {
         param_0: [
           { required: true, message: '请输入参数0', trigger: 'blur' },
@@ -129,7 +121,9 @@ export default {
 
   methods: {
     submitForm () {
-      console.log('submit!')
+      Method1ParamsUpload(this.params).then(res => {
+        console.log(res)
+      })
     },
     resetForm () {
       console.log('reset!')

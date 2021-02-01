@@ -19,7 +19,6 @@
 <script>
 import vHead from './Header.vue'
 import vSidebar from './Sidebar.vue'
-import vTags from './Tags.vue'
 import bus from './bus'
 
 export default {
@@ -31,8 +30,7 @@ export default {
   },
   components: {
     vHead,
-    vSidebar,
-    vTags
+    vSidebar
   },
   created () {
     bus.$on('collapse-content', msg => {

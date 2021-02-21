@@ -10,8 +10,8 @@
     </div>
     <div class="container">
       <div class="introduction-box">
-        <el-row :gutter="20">
-          <el-col :span="12">
+        <el-row :gutter="20" >
+          <el-col :span="9">
             <el-collapse v-model="activeName" accordion>
               <el-collapse-item title="算法简介 Algorithm introduction" name="1">
                 <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
@@ -31,32 +31,24 @@
               </el-collapse-item>
             </el-collapse>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="5">
             <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-              <el-form-item label="参数零：" prop="param_0">
-                <el-input v-model="params.param_0" maxlength="10" show-word-limit></el-input>
+              <el-form-item label="threshold:" prop="threshold">
+                <el-input v-model="params.threshold" ></el-input>
               </el-form-item>
-              <el-form-item label="参数一：" prop="param_1">
-                <el-select v-model="params.param_1" placeholder="请选择参数">
-                  <el-option label="1.0" value="value1"></el-option>
-                  <el-option label="2.0" value="value2"></el-option>
-                </el-select>
+              <el-form-item label="scaleFactor:" prop="scaleFactor">
+                <el-input v-model="params.scaleFactor" ></el-input>
               </el-form-item>
-              <el-form-item label="参数二：" prop="param_2">
-                <el-select v-model="params.param_2" placeholder="请选择参数">
-                  <el-option label="1.0" value="value1"></el-option>
-                  <el-option label="2.0" value="value2"></el-option>
-                  <el-option label="3.0" value="value3"></el-option>
-                  <el-option label="4.0" value="value4"></el-option>
-                </el-select>
+              <el-form-item label="rou:" prop="rou">
+                <el-input v-model="params.rou" ></el-input>
               </el-form-item>
-              <el-form-item label="参数三：" prop="param_3">
-                <el-switch v-model="params.param_3"></el-switch>
+              <el-form-item label="phe:" prop="phe">
+                <el-input v-model="params.phe"></el-input>
               </el-form-item>
                 <el-form-item label="数据文件" prop="data_1">
                   <el-upload
                     class="upload-demo"
-                    action="http://localhost:8080/uploadDemo"
+                    action="http://localhost:8080/HiSeekerInputDataUpload"
                     name="txtFile"
                     :on-preview="handlePreview"
                     :on-remove="handleRemove"
@@ -64,14 +56,69 @@
                     multiple
                     :limit="3"
                     :on-exceed="handleExceed">
-                    <el-button type="primary">点击上传</el-button>
-                    <div slot="tip" class="el-upload__tip">只能上传txt文件，且不超过500kb</div>
+                    <el-button type="primary" :disabled = !frontParams.readyRun>点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">请上传txt文件，且不超过100MB</div>
                   </el-upload>
               </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="5" >
+            <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+              <el-form-item label="alpha:" prop="alpha">
+                <el-input v-model="params.alpha"></el-input>
+              </el-form-item>
+              <el-form-item label="iAntCount:" prop="iAntCount">
+                <el-input v-model="params.iAntCount"></el-input>
+              </el-form-item>
+              <el-form-item label="iterCount:" prop="iterCount">
+                <el-input v-model="params.iterCount"></el-input>
+              </el-form-item>
+              <el-form-item label="kLociSet:" prop="kLociSet">
+                <el-input v-model="params.kLociSet"></el-input>
+              </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="submitForm()">运行算法</el-button>
-                <el-button @click="resetForm('ruleForm')">结果下载</el-button>
-                <el-button @click="resetForm('ruleForm')">样例下载</el-button>
+                <p></p>
+              </el-form-item>
+              <el-form-item>
+                <p></p>
+              </el-form-item>
+              <el-form-item>
+                <p></p>
+              </el-form-item>
+              <el-form-item>
+                <p></p>
+              </el-form-item>
+              <el-form-item>
+                <p></p>
+              </el-form-item>
+              <el-form-item>
+              </el-form-item>
+              <el-form-item>
+                <p></p>
+              </el-form-item>
+              <el-form-item>
+                <p></p>
+              </el-form-item>
+            </el-form>
+              <el-row type="flex" justify="center">
+                <el-button type="primary" @click="submitForm()" :disabled = !frontParams.readyRun>运行算法</el-button>
+                <el-button type="primary" @click="downloadRes()" :disabled = !paramId.finished plain>结果下载</el-button>
+                <el-button @click="stopPoll()">测试按钮</el-button>
+              </el-row>
+          </el-col>
+          <el-col :span="5">
+            <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+              <el-form-item label="kEpiModel:" prop="kEpiModel">
+                <el-input v-model="params.kEpiModel" ></el-input>
+              </el-form-item>
+              <el-form-item label="kTopModel:" prop="kTopModel">
+                <el-input v-model="params.kTopModel"></el-input>
+              </el-form-item>
+              <el-form-item label="topK:" prop="topK">
+                <el-input v-model="params.topK"></el-input>
+              </el-form-item>
+              <el-form-item label="searchType:" prop="typeOfSearch">
+                <el-input v-model="params.typeOfSearch"></el-input>
               </el-form-item>
             </el-form>
           </el-col>
@@ -82,7 +129,8 @@
 </template>
 
 <script>
-import {Method1ParamsUpload} from '../../api/index'
+
+import {HiSeekerParamsUpload, HiSeekerPollResultData} from '../../api/index'
 
 export default {
   name: 'HiSeekerPage',
@@ -90,45 +138,125 @@ export default {
     return {
       // 左半部分参数
       activeName: '1',
-      pics: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F11981132422%2F0.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1614744153&t=79514d4f045ee1eb4d6b9f2753d1e064',
+      pics: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Ffront%2F316%2Fw666h450%2F20190322%2F88Xa-huqrnap1261591.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1616210063&t=2536abc9b53f67f231d285a2dbe70863',
       // 右半部分参数
       params: {
-        param_0: '12345',
-        param_1: '1.0',
-        param_2: '2.0',
-        param_3: true
+        threshold: '0.05',
+        scaleFactor: '10000',
+        rou: '0.05',
+        phe: '100',
+        alpha: '1',
+        iAntCount: '500',
+        iterCount: '200',
+        kLociSet: '2',
+        kEpiModel: '3',
+        kTopModel: '800',
+        topK: '100',
+        typeOfSearch: '0'
+      },
+      paramId: {
+        queryId: '',
+        finished: false
+      },
+      frontParams: {
+        readyRun: true
       },
       rules: {
-        param_0: [
-          { required: true, message: '请输入参数0', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+        threshold: [
+          { required: true, message: '参数threshold是必须的', trigger: 'blur' },
+          { min: 1, max: 6, message: '长度在 1 到 6 个字符', trigger: 'blur' }
         ],
-        param_1: [
-          { required: true, message: '请输入参数1', trigger: 'change' } // trigger为表单验证触发方式
+        scaleFactor: [
+          { required: true, message: '参数scaleFactor是必须的', trigger: 'change' }
         ],
-        param_2: [
-          { required: true, message: '请输入参数2', trigger: 'change' }
+        rou: [
+          { required: true, message: '参数rou是必须的', trigger: 'change' }
         ],
-        param_3: [
-          { required: true, message: '请输入参数3', trigger: 'change' }
+        phe: [
+          { required: true, message: '参数phe是必须的', trigger: 'change' }
         ],
-        param_4: [
-          { type: 'array', required: true, message: '请至少选择一个香料', trigger: 'change' }
+        alpha: [
+          { required: true, message: '参数alpha是必须的', trigger: 'change' }
+        ],
+        iAntCount: [
+          { required: true, message: '参数iAntCount是必须的', trigger: 'change' }
+        ],
+        iterCount: [
+          { required: true, message: '参数iterCount是必须的', trigger: 'change' }
+        ],
+        kLociSet: [
+          { required: true, message: '参数kLociSet是必须的', trigger: 'change' }
+        ],
+        kEpiModel: [
+          { required: true, message: '参数kEpiModel是必须的', trigger: 'change' }
+        ],
+        topK: [
+          { required: true, message: '参数topK是必须的', trigger: 'change' }
+        ],
+        typeOfSearch: [
+          { required: true, message: '参数typeOfSearch是必须的', trigger: 'change' }
         ]
       }
     }
   },
 
   methods: {
+    // 调用算法方法
     submitForm () {
-      Method1ParamsUpload(this.params).then(res => {
+      // 请求后端
+      HiSeekerParamsUpload(this.params).then(res => {
         console.log(res)
+        console.log(res.queryId)
+        this.paramId.queryId = res.queryId
+      })
+      this.startPoll()
+      // 在算法完成前，禁止再次使用算法（暂时的策略）
+      this.frontParams.readyRun = false
+      this.paramId.finished = false
+    },
+    // 下载返回结果文件方法
+    downloadRes () {
+      console.log('downloadRes Method')
+      window.location.href = 'http://localhost:8080/HiSeekerResultDataDownload'
+      // 下载文件后，解除禁用
+      this.frontParams.readyRun = true
+    },
+    // 轮询方法，请求后端后自动执行
+    pollResultData () {
+      HiSeekerPollResultData(this.paramId).then(res => {
+        console.log(res)
+        if (res.finished === 'true') {
+          // do something
+          this.paramId.finished = true
+          this.stopPoll()
+        }
       })
     },
-    resetForm () {
-      console.log('reset!')
+    startPoll () {
+      this.myInterval = window.setInterval(() => {
+        setTimeout(() => {
+          this.pollResultData()
+        }, 1)
+      }, 1000)
     },
-    // 数据上传方法
+    // 停止轮询方法
+    stopPoll () {
+      clearInterval(this.myInterval)
+    },
+    // 生成调用号方法
+    createQueryId () {
+      var _this = this
+      let yy = new Date().getFullYear()
+      let mm = new Date().getMonth() + 1
+      let dd = new Date().getDate()
+      let hh = new Date().getHours()
+      let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()
+      let ss = new Date().getSeconds() < 10 ? '0' + new Date().getSeconds() : new Date().getSeconds()
+      let getTime = yy + '-' + mm + '-' + dd + '-' + hh + '-' + mf + '-' + ss
+      _this.params.queryId = getTime
+      console.log(this.params.queryId)
+    },
+    // 输入数据上传方法
     handleRemove (file, fileList) {
       console.log(file, fileList)
     },

@@ -13,17 +13,38 @@ export const fetchDemo = query => {
   return request(
     {
       url: 'http://localhost:8080/hello',
-      method: 'post',
+      method: 'get',
       params: query
     }
   )
 }
 
-// Method1_params上传
-export const Method1ParamsUpload = params => {
+// HiSeeker params上传
+export const HiSeekerParamsUpload = params => {
   return request(
     {
-      url: 'http://localhost:8080/Method1_Params',
+      url: 'http://localhost:8080/HiSeekerParamsUpload',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// HiSeeker ResultData Download 结果文件下载
+export const HiSeekerResultDataDownload = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/HiSeekerResultDataDownload',
+      method: 'get'
+    }
+  )
+}
+
+// HiSeeker Poll ResultData 结果轮询
+export const HiSeekerPollResultData = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/HiSeekerPollResultData',
       method: 'post',
       params: params
     }

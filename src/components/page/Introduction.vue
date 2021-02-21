@@ -74,7 +74,7 @@ export default {
   data () {
     return {
       activeName: '1',
-      pics: ['https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F11981132422%2F0.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1614744153&t=79514d4f045ee1eb4d6b9f2753d1e064']
+      pics: ['https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Ffront%2F316%2Fw666h450%2F20190322%2F88Xa-huqrnap1261591.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1616210063&t=2536abc9b53f67f231d285a2dbe70863']
     }
   },
 

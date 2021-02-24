@@ -50,3 +50,35 @@ export const HiSeekerPollResultData = params => {
     }
   )
 }
+
+// ClusterMI params上传
+export const ClusterMIParamsUpload = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/ClusterMIParamsUpload',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// ClusterMI ResultData Download 结果文件下载
+export const ClusterMIResultDataDownload = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/ClusterMIResultDataDownload',
+      method: 'get'
+    }
+  )
+}
+
+// ClusterMI Poll ResultData 结果轮询
+export const ClusterMIPollResultData = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/ClusterMIPollResultData',
+      method: 'post',
+      params: params
+    }
+  )
+}

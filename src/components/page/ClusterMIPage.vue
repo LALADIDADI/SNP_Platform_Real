@@ -5,7 +5,7 @@
         <el-breadcrumb-item>
           <i class="el-icon-lx-calendar"></i> 算法板块
         </el-breadcrumb-item>
-        <el-breadcrumb-item>HiSeeker</el-breadcrumb-item>
+        <el-breadcrumb-item>ClusterMI</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="container">
@@ -33,11 +33,11 @@
           </el-col>
           <el-col :span="5">
             <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-              <el-form-item label="threshold:" prop="threshold">
-                <el-input v-model="params.threshold" ></el-input>
+              <el-form-item label="sigThreshold:" prop="sigThreshold">
+                <el-input v-model="params.sigThreshold" ></el-input>
               </el-form-item>
-              <el-form-item label="scaleFactor:" prop="scaleFactor">
-                <el-input v-model="params.scaleFactor" ></el-input>
+              <el-form-item label="kCluster:" prop="kCluster">
+                <el-input v-model="params.kCluster" ></el-input>
               </el-form-item>
               <el-form-item label="rou:" prop="rou">
                 <el-input v-model="params.rou" ></el-input>
@@ -45,20 +45,20 @@
               <el-form-item label="phe:" prop="phe">
                 <el-input v-model="params.phe"></el-input>
               </el-form-item>
-                <el-form-item label="数据文件" prop="data_1">
-                  <el-upload
-                    class="upload-demo"
-                    action="http://localhost:8080/HiSeekerInputDataUpload"
-                    name="txtFile"
-                    :on-preview="handlePreview"
-                    :on-remove="handleRemove"
-                    :before-remove="beforeRemove"
-                    multiple
-                    :limit="3"
-                    :on-exceed="handleExceed">
-                    <el-button type="primary" :disabled = !frontParams.readyRun>点击上传</el-button>
-                    <div slot="tip" class="el-upload__tip">请上传txt文件，且不超过100MB</div>
-                  </el-upload>
+              <el-form-item label="数据文件" prop="data_1">
+                <el-upload
+                  class="upload-demo"
+                  action="http://localhost:8080/ClusterMIInputDataUpload"
+                  name="txtFile"
+                  :on-preview="handlePreview"
+                  :on-remove="handleRemove"
+                  :before-remove="beforeRemove"
+                  multiple
+                  :limit="3"
+                  :on-exceed="handleExceed">
+                  <el-button type="primary" :disabled = !frontParams.readyRun>点击上传</el-button>
+                  <div slot="tip" class="el-upload__tip">请上传txt文件，且不超过100MB</div>
+                </el-upload>
               </el-form-item>
             </el-form>
           </el-col>
@@ -100,11 +100,11 @@
                 <p></p>
               </el-form-item>
             </el-form>
-              <el-row type="flex" justify="center">
-                <el-button type="primary" @click="submitForm()" :disabled = !frontParams.readyRun>运行算法</el-button>
-                <el-button type="primary" @click="downloadRes()" :disabled = !paramId.finished plain>结果下载</el-button>
-                <el-button @click="stopPoll()">测试按钮</el-button>
-              </el-row>
+            <el-row type="flex" justify="center">
+              <el-button type="primary" @click="submitForm()" :disabled = !frontParams.readyRun>运行算法</el-button>
+              <el-button type="primary" @click="downloadRes()" :disabled = !paramId.finished plain>结果下载</el-button>
+              <el-button @click="stopPoll()">测试按钮</el-button>
+            </el-row>
           </el-col>
           <el-col :span="5">
             <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -130,10 +130,10 @@
 
 <script>
 
-import {HiSeekerParamsUpload, HiSeekerPollResultData} from '../../api/index'
+import {ClusterMIParamsUpload, ClusterMIPollResultData} from '../../api/index'
 
 export default {
-  name: 'HiSeekerPage',
+  name: 'ClusterMIPage',
   data () {
     return {
       // 左半部分参数
@@ -141,16 +141,16 @@ export default {
       pics: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Ffront%2F316%2Fw666h450%2F20190322%2F88Xa-huqrnap1261591.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1616210063&t=2536abc9b53f67f231d285a2dbe70863',
       // 右半部分参数
       params: {
-        threshold: '0.05',
-        scaleFactor: '10000',
-        rou: '0.05',
-        phe: '100',
+        sigThreshold: '0.05',
+        kCluster: '3',
+        rou: '0.01',
+        phe: '500',
         alpha: '1',
-        iAntCount: '500',
-        iterCount: '200',
+        iAntCount: '1000',
+        iterCount: '100',
         kLociSet: '2',
         kEpiModel: '3',
-        kTopModel: '800',
+        kTopModel: '1000',
         topK: '100',
         typeOfSearch: '0'
       },
@@ -162,12 +162,12 @@ export default {
         readyRun: true
       },
       rules: {
-        threshold: [
-          { required: true, message: '参数threshold是必须的', trigger: 'blur' },
+        sigThreshold: [
+          { required: true, message: '参数sigThreshold是必须的', trigger: 'blur' },
           { min: 1, max: 6, message: '长度在 1 到 6 个字符', trigger: 'blur' }
         ],
-        scaleFactor: [
-          { required: true, message: '参数scaleFactor是必须的', trigger: 'change' }
+        kCluster: [
+          { required: true, message: '参数kCluster是必须的', trigger: 'change' }
         ],
         rou: [
           { required: true, message: '参数rou是必须的', trigger: 'change' }
@@ -204,7 +204,7 @@ export default {
     // 调用算法方法
     submitForm () {
       // 请求后端
-      HiSeekerParamsUpload(this.params).then(res => {
+      ClusterMIParamsUpload(this.params).then(res => {
         console.log(res)
         console.log(res.queryId)
         this.paramId.queryId = res.queryId
@@ -217,13 +217,13 @@ export default {
     // 下载返回结果文件方法
     downloadRes () {
       console.log('downloadRes Method')
-      window.location.href = 'http://localhost:8080/HiSeekerResultDataDownload'
+      window.location.href = 'http://localhost:8080/ClusterMIResultDataDownload'
       // 下载文件后，解除禁用
       this.frontParams.readyRun = true
     },
     // 轮询方法，请求后端后自动执行
     pollResultData () {
-      HiSeekerPollResultData(this.paramId).then(res => {
+      ClusterMIPollResultData(this.paramId).then(res => {
         console.log(res)
         if (res.finished === 'true') {
           // do something

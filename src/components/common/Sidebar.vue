@@ -71,11 +71,11 @@ export default {
           subs: [
             {
               index: 'HiSeekerPage',
-              title: '算法1'
+              title: 'HiSeeker算法'
             },
             {
-              index: 'upload',
-              title: '算法2'
+              index: 'ClusterMIPage',
+              title: 'ClusterMI算法'
             },
             {
               index: 'upload1',

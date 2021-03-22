@@ -42,7 +42,7 @@ export default {
     return {
       form: {
         name: '123',
-        textarea: '现在我是初始状态'
+        textarea: '信息将会在此处显示'
       }
     }
   },

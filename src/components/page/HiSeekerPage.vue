@@ -14,8 +14,9 @@
           <el-col :span="9">
             <el-collapse v-model="activeName" accordion>
               <el-collapse-item title="算法简介 Algorithm introduction" name="1">
-                <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-                <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+                <div>HiSeeker为两阶段算法：</div>
+                <div>在筛选阶段，HiSeeker结合卡方检验和逻辑回归对两位点组合进行快速的分析筛选；</div>
+                <div>在搜索阶段，HiSeeker根据保留两位点组合的数量大小采用不同的搜索策略。</div>
               </el-collapse-item>
               <el-collapse-item title="算法流程图 Algorithm flowchart" name="2">
                 <el-image :src="pics"></el-image>
@@ -103,7 +104,7 @@
               <el-row type="flex" justify="center">
                 <el-button type="primary" @click="submitForm()" :disabled = !frontParams.readyRun>运行算法</el-button>
                 <el-button type="primary" @click="downloadRes()" :disabled = !paramId.finished plain>结果下载</el-button>
-                <el-button @click="stopPoll()">测试按钮</el-button>
+<!--                <el-button @click="stopPoll()">测试按钮</el-button>-->
               </el-row>
           </el-col>
           <el-col :span="5">
@@ -138,7 +139,7 @@ export default {
     return {
       // 左半部分参数
       activeName: '1',
-      pics: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Ffront%2F316%2Fw666h450%2F20190322%2F88Xa-huqrnap1261591.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1616210063&t=2536abc9b53f67f231d285a2dbe70863',
+      pics: 'http://img01.jituwang.com/200714/175123-200G405012197.jpg',
       // 右半部分参数
       params: {
         threshold: '0.05',

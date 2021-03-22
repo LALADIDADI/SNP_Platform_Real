@@ -74,7 +74,7 @@ export default {
   data () {
     return {
       activeName: '1',
-      pics: ['https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Ffront%2F316%2Fw666h450%2F20190322%2F88Xa-huqrnap1261591.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1616210063&t=2536abc9b53f67f231d285a2dbe70863']
+      pics: ['http://img01.jituwang.com/200714/175123-200G405012197.jpg']
     }
   },
 

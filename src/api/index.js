@@ -82,3 +82,35 @@ export const ClusterMIPollResultData = params => {
     }
   )
 }
+
+// DCHE params上传
+export const DCHEParamsUpload = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/DCHEParamsUpload',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// DCHE ResultData Download 结果文件下载
+export const DCHEResultDataDownload = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/DCHEResultDataDownload',
+      method: 'get'
+    }
+  )
+}
+
+// DCHE Poll ResultData 结果轮询
+export const DCHEPollResultData = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/DCHEPollResultData',
+      method: 'post',
+      params: params
+    }
+  )
+}

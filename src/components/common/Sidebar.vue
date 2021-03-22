@@ -78,8 +78,8 @@ export default {
               title: 'ClusterMI算法'
             },
             {
-              index: 'upload1',
-              title: '算法3'
+              index: 'DCHEPage',
+              title: 'DCHE算法'
             },
             {
               index: 'upload2',

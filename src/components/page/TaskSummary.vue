@@ -126,17 +126,17 @@ export default {
       }, {
         date: '2016-05-02',
         number: '0002',
-        method: 'HeySeeker',
+        method: 'ClusterMI',
         status: '正在进行'
       }, {
         date: '2016-05-02',
         number: '0003',
-        method: 'HelloSeeker',
+        method: 'ClusterMI',
         status: '正在进行'
       }, {
         date: '2016-05-02',
         number: '0004',
-        method: 'OhSeeker',
+        method: 'HiSeeker',
         status: '正在进行'
       }]
     }

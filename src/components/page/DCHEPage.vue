@@ -5,7 +5,7 @@
         <el-breadcrumb-item>
           <i class="el-icon-lx-calendar"></i> 算法板块
         </el-breadcrumb-item>
-        <el-breadcrumb-item>ClusterMI</el-breadcrumb-item>
+        <el-breadcrumb-item>DCHE</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="container">
@@ -31,24 +31,21 @@
               </el-collapse-item>
             </el-collapse>
           </el-col>
-          <el-col :span="5">
+          <el-col :span="7">
             <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-              <el-form-item label="sigThreshold:" prop="sigThreshold">
-                <el-input v-model="params.sigThreshold" ></el-input>
+              <el-form-item label="order:" prop="order">
+                <el-input v-model="params.order" ></el-input>
               </el-form-item>
-              <el-form-item label="kCluster:" prop="kCluster">
-                <el-input v-model="params.kCluster" ></el-input>
+              <el-form-item label="alpha0:" prop="alpha0">
+                <el-input v-model="params.alpha0" ></el-input>
               </el-form-item>
-              <el-form-item label="rou:" prop="rou">
-                <el-input v-model="params.rou" ></el-input>
-              </el-form-item>
-              <el-form-item label="phe:" prop="phe">
-                <el-input v-model="params.phe"></el-input>
+              <el-form-item label="sizeList:" prop="sizeList">
+                <el-input v-model="params.sizeList" ></el-input>
               </el-form-item>
               <el-form-item label="数据文件" prop="data_1">
                 <el-upload
                   class="upload-demo"
-                  action="http://localhost:8080/ClusterMIInputDataUpload"
+                  action="http://localhost:8080/DCHEInputDataUpload"
                   name="txtFile"
                   :on-preview="handlePreview"
                   :on-remove="handleRemove"
@@ -62,19 +59,31 @@
               </el-form-item>
             </el-form>
           </el-col>
-          <el-col :span="5" >
+          <el-col :span="7" >
             <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-              <el-form-item label="alpha:" prop="alpha">
-                <el-input v-model="params.alpha"></el-input>
+              <el-form-item>
+                <p></p>
               </el-form-item>
-              <el-form-item label="iAntCount:" prop="iAntCount">
-                <el-input v-model="params.iAntCount"></el-input>
+              <el-form-item>
+                <p></p>
               </el-form-item>
-              <el-form-item label="iterCount:" prop="iterCount">
-                <el-input v-model="params.iterCount"></el-input>
+              <el-form-item>
+                <p></p>
               </el-form-item>
-              <el-form-item label="kLociSet:" prop="kLociSet">
-                <el-input v-model="params.kLociSet"></el-input>
+              <el-form-item>
+                <p></p>
+              </el-form-item>
+              <el-form-item>
+                <p></p>
+              </el-form-item>
+              <el-form-item>
+                <p></p>
+              </el-form-item>
+              <el-form-item>
+                <p></p>
+              </el-form-item>
+              <el-form-item>
+                <p></p>
               </el-form-item>
               <el-form-item>
                 <p></p>
@@ -103,24 +112,8 @@
             <el-row type="flex" justify="center">
               <el-button type="primary" @click="submitForm()" :disabled = !frontParams.readyRun>运行算法</el-button>
               <el-button type="primary" @click="downloadRes()" :disabled = !paramId.finished plain>结果下载</el-button>
-<!--              <el-button @click="stopPoll()">测试按钮</el-button>-->
+              <el-button @click="stopPoll()">测试按钮</el-button>
             </el-row>
-          </el-col>
-          <el-col :span="5">
-            <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-              <el-form-item label="kEpiModel:" prop="kEpiModel">
-                <el-input v-model="params.kEpiModel" ></el-input>
-              </el-form-item>
-              <el-form-item label="kTopModel:" prop="kTopModel">
-                <el-input v-model="params.kTopModel"></el-input>
-              </el-form-item>
-              <el-form-item label="topK:" prop="topK">
-                <el-input v-model="params.topK"></el-input>
-              </el-form-item>
-              <el-form-item label="searchType:" prop="typeOfSearch">
-                <el-input v-model="params.typeOfSearch"></el-input>
-              </el-form-item>
-            </el-form>
           </el-col>
         </el-row>
       </div>
@@ -130,10 +123,10 @@
 
 <script>
 
-import {ClusterMIParamsUpload, ClusterMIPollResultData} from '../../api/index'
+import {DCHEParamsUpload, DCHEPollResultData} from '../../api/index'
 
 export default {
-  name: 'ClusterMIPage',
+  name: 'DCHEPage',
   data () {
     return {
       // 左半部分参数
@@ -141,18 +134,9 @@ export default {
       pics: 'http://img01.jituwang.com/200714/175123-200G405012197.jpg',
       // 右半部分参数
       params: {
-        sigThreshold: '0.05',
-        kCluster: '3',
-        rou: '0.01',
-        phe: '500',
-        alpha: '1',
-        iAntCount: '1000',
-        iterCount: '100',
-        kLociSet: '2',
-        kEpiModel: '3',
-        kTopModel: '1000',
-        topK: '100',
-        typeOfSearch: '0'
+        order: '2',
+        alpha0: '1.5E-03,1.2E-08',
+        sizeList: '200,30'
       },
       paramId: {
         queryId: '',
@@ -162,39 +146,15 @@ export default {
         readyRun: true
       },
       rules: {
-        sigThreshold: [
-          { required: true, message: '参数sigThreshold是必须的', trigger: 'blur' },
-          { min: 1, max: 6, message: '长度在 1 到 6 个字符', trigger: 'blur' }
+        order: [
+          { required: true, message: '参数order是必须的', trigger: 'blur' },
+          { min: 1, max: 3, message: '长度在 1 到 3 个字符', trigger: 'blur' }
         ],
-        kCluster: [
-          { required: true, message: '参数kCluster是必须的', trigger: 'change' }
+        alpha0: [
+          { required: true, message: '参数alpha0是必须的,请使用英文逗号分割', trigger: 'change' }
         ],
-        rou: [
-          { required: true, message: '参数rou是必须的', trigger: 'change' }
-        ],
-        phe: [
-          { required: true, message: '参数phe是必须的', trigger: 'change' }
-        ],
-        alpha: [
-          { required: true, message: '参数alpha是必须的', trigger: 'change' }
-        ],
-        iAntCount: [
-          { required: true, message: '参数iAntCount是必须的', trigger: 'change' }
-        ],
-        iterCount: [
-          { required: true, message: '参数iterCount是必须的', trigger: 'change' }
-        ],
-        kLociSet: [
-          { required: true, message: '参数kLociSet是必须的', trigger: 'change' }
-        ],
-        kEpiModel: [
-          { required: true, message: '参数kEpiModel是必须的', trigger: 'change' }
-        ],
-        topK: [
-          { required: true, message: '参数topK是必须的', trigger: 'change' }
-        ],
-        typeOfSearch: [
-          { required: true, message: '参数typeOfSearch是必须的', trigger: 'change' }
+        sizeList: [
+          { required: true, message: '参数sizeList是必须的,请使用英文逗号分割', trigger: 'change' }
         ]
       }
     }
@@ -204,7 +164,7 @@ export default {
     // 调用算法方法
     submitForm () {
       // 请求后端
-      ClusterMIParamsUpload(this.params).then(res => {
+      DCHEParamsUpload(this.params).then(res => {
         console.log(res)
         console.log(res.queryId)
         this.paramId.queryId = res.queryId
@@ -217,13 +177,13 @@ export default {
     // 下载返回结果文件方法
     downloadRes () {
       console.log('downloadRes Method')
-      window.location.href = 'http://localhost:8080/ClusterMIResultDataDownload'
+      window.location.href = 'http://localhost:8080/DCHEResultDataDownload'
       // 下载文件后，解除禁用
       this.frontParams.readyRun = true
     },
     // 轮询方法，请求后端后自动执行
     pollResultData () {
-      ClusterMIPollResultData(this.paramId).then(res => {
+      DCHEPollResultData(this.paramId).then(res => {
         console.log(res)
         if (res.finished === 'true') {
           // do something

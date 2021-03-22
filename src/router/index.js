@@ -29,6 +29,11 @@ export default new Router({
           component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/ClusterMIPage.vue'),
           meta: {title: '算法2'}
         },
+        {// 算法3----ClusterMIPage
+          path: '/DCHEPage',
+          component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/DCHEPage.vue'),
+          meta: {title: '算法3'}
+        },
         {// 数据生成界面
           path: '/DataGeneration',
           component: () => import(/* webpackChunkName: "icon" */ '../components/page/DataGeneration.vue'),

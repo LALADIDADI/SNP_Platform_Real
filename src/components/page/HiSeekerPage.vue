@@ -49,16 +49,19 @@
                 <el-form-item label="数据文件" prop="data_1">
                   <el-upload
                     class="upload-demo"
+                    ref="my-upload"
                     action="http://localhost:8080/HiSeekerInputDataUpload"
                     name="txtFile"
+                    :show-file-list = false
                     :on-preview="handlePreview"
                     :on-remove="handleRemove"
                     :before-remove="beforeRemove"
                     multiple
-                    :limit="3"
+                    :limit="105"
+                    :on-success="uploadSuccess"
                     :on-exceed="handleExceed">
                     <el-button type="primary" :disabled = !frontParams.readyRun>点击上传</el-button>
-                    <div slot="tip" class="el-upload__tip">请上传txt文件，且不超过100MB</div>
+                    <div slot="tip" class="el-upload__tip">请上传txt文件，且不超过500MB</div>
                   </el-upload>
               </el-form-item>
             </el-form>
@@ -77,31 +80,19 @@
               <el-form-item label="kLociSet:" prop="kLociSet">
                 <el-input v-model="params.kLociSet"></el-input>
               </el-form-item>
-              <el-form-item>
-                <p></p>
-              </el-form-item>
-              <el-form-item>
-                <p></p>
-              </el-form-item>
-              <el-form-item>
-                <p></p>
-              </el-form-item>
-              <el-form-item>
-                <p></p>
-              </el-form-item>
-              <el-form-item>
-                <p></p>
-              </el-form-item>
-              <el-form-item>
-              </el-form-item>
-              <el-form-item>
-                <p></p>
-              </el-form-item>
+              <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                  <span>算法进度</span>
+                </div>
+                <div class="text item">
+                  <el-progress :text-inside="true" :stroke-width="24" :percentage=paramId.progress status="success"></el-progress>
+                </div>
+              </el-card>
               <el-form-item>
                 <p></p>
               </el-form-item>
             </el-form>
-              <el-row type="flex" justify="center">
+              <el-row type="flex" justify="left">
                 <el-button type="primary" @click="submitForm()" :disabled = !frontParams.readyRun>运行算法</el-button>
                 <el-button type="primary" @click="downloadRes()" :disabled = !paramId.finished plain>结果下载</el-button>
 <!--                <el-button @click="stopPoll()">测试按钮</el-button>-->
@@ -157,10 +148,14 @@ export default {
       },
       paramId: {
         queryId: '',
-        finished: false
+        finished: false,
+        progress: 0
       },
       frontParams: {
         readyRun: true
+      },
+      localParams: {
+        fileCount: 0
       },
       rules: {
         threshold: [
@@ -214,6 +209,8 @@ export default {
       // 在算法完成前，禁止再次使用算法（暂时的策略）
       this.frontParams.readyRun = false
       this.paramId.finished = false
+      // 清空文件列表
+      this.wipeButt()
     },
     // 下载返回结果文件方法
     downloadRes () {
@@ -231,6 +228,8 @@ export default {
           this.paramId.finished = true
           this.stopPoll()
         }
+        // 实时更新进度条
+        this.paramId.progress = res.progress
       })
     },
     startPoll () {
@@ -257,7 +256,7 @@ export default {
       _this.params.queryId = getTime
       console.log(this.params.queryId)
     },
-    // 输入数据上传方法
+    // 数据上传方法相关，element ui
     handleRemove (file, fileList) {
       console.log(file, fileList)
     },
@@ -269,6 +268,26 @@ export default {
     },
     beforeRemove (file, fileList) {
       return this.$confirm(`确定移除该文件吗？`)
+    },
+    uploadSuccess (response, files, fileList) {
+      this.localParams.fileCount += 1
+      if (this.localParams.fileCount < fileList.length) {
+        return 0
+      } else {
+        return this.$message({
+          message: `上传成功，共上传${fileList.length}个文件`,
+          type: `success`
+        })
+      }
+    },
+    // 重置因上传成功无法恢复的状态，比如文件列表和fileCount
+    wipeButt () {
+      this.localParams.fileCount = 0
+      this.$refs['my-upload'].clearFiles()
+    },
+    // 文件上传代表清空进度条
+    uploadFiles () {
+      this.paramId.progress = 0
     }
   }
 }
@@ -317,5 +336,26 @@ export default {
 .avatar{
   width: 100px;
   height: 100px;
+}
+/*卡片*/
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 5px;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both
+}
+
+.box-card {
+  width: 270px;
 }
 </style>

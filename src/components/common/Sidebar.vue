@@ -82,12 +82,12 @@ export default {
               title: 'DCHE算法'
             },
             {
-              index: 'upload2',
-              title: '算法4'
+              index: 'DECMDRPage',
+              title: 'DECMDR算法'
             },
             {
-              index: 'upload3',
-              title: '算法5'
+              index: 'MACOEDPage',
+              title: 'MACOED算法'
             },
             {
               index: 'upload4',

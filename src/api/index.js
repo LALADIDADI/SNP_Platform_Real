@@ -114,3 +114,67 @@ export const DCHEPollResultData = params => {
     }
   )
 }
+
+// DECMDR params上传
+export const DECMDRParamsUpload = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/DECMDRParamsUpload',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// DECMDR ResultData Download 结果文件下载
+export const DECMDRResultDataDownload = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/DECMDRResultDataDownload',
+      method: 'get'
+    }
+  )
+}
+
+// DECMDR Poll ResultData 结果轮询
+export const DECMDRPollResultData = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/DECMDRPollResultData',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// MACOED params上传
+export const MACOEDParamsUpload = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/MACOEDParamsUpload',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// MACOED ResultData Download 结果文件下载
+export const MACOEDResultDataDownload = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/MACOEDResultDataDownload',
+      method: 'get'
+    }
+  )
+}
+
+// MACOED Poll ResultData 结果轮询
+export const MACOEDPollResultData = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/MACOEDPollResultData',
+      method: 'post',
+      params: params
+    }
+  )
+}

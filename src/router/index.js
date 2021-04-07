@@ -34,6 +34,16 @@ export default new Router({
           component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/DCHEPage.vue'),
           meta: {title: '算法3'}
         },
+        {// 算法4----DECMDRPage
+          path: '/DECMDRPage',
+          component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/DECMDRPage.vue'),
+          meta: {title: '算法4'}
+        },
+        {// 算法5----MACOEDPage
+          path: '/MACOEDPage',
+          component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/MACOEDPage.vue'),
+          meta: {title: '算法5'}
+        },
         {// 数据生成界面
           path: '/DataGeneration',
           component: () => import(/* webpackChunkName: "icon" */ '../components/page/DataGeneration.vue'),

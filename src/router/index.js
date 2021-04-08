@@ -44,6 +44,11 @@ export default new Router({
           component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/MACOEDPage.vue'),
           meta: {title: '算法5'}
         },
+        {// 算法6----DualWMDRPage
+          path: '/DualWMDRPage',
+          component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/DualWMDRPage.vue'),
+          meta: {title: '算法6'}
+        },
         {// 数据生成界面
           path: '/DataGeneration',
           component: () => import(/* webpackChunkName: "icon" */ '../components/page/DataGeneration.vue'),

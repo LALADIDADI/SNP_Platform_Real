@@ -178,3 +178,35 @@ export const MACOEDPollResultData = params => {
     }
   )
 }
+
+// DualWMDR params上传
+export const DualWMDRParamsUpload = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/DualWMDRParamsUpload',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// DualWMDR ResultData Download 结果文件下载
+export const DualWMDRResultDataDownload = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/DualWMDRResultDataDownload',
+      method: 'get'
+    }
+  )
+}
+
+// DualWMDR Poll ResultData 结果轮询
+export const DualWMDRPollResultData = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/DualWMDRPollResultData',
+      method: 'post',
+      params: params
+    }
+  )
+}

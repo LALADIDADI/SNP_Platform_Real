@@ -5,7 +5,7 @@
         <el-breadcrumb-item>
           <i class="el-icon-lx-calendar"></i> 算法板块
         </el-breadcrumb-item>
-        <el-breadcrumb-item>MACOED</el-breadcrumb-item>
+        <el-breadcrumb-item>DualWMDR</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="container">
@@ -33,23 +33,23 @@
           </el-col>
           <el-col :span="6">
             <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-              <el-form-item label="maxIter:" prop="maxIter">
-                <el-input v-model="params.maxIter" ></el-input>
+              <el-form-item label="percent:" prop="percent">
+                <el-input v-model="params.percent" ></el-input>
               </el-form-item>
-              <el-form-item label="numAnt:" prop="numAnt">
-                <el-input v-model="params.numAnt" ></el-input>
+              <el-form-item label="topT:" prop="topT">
+                <el-input v-model="params.topT" ></el-input>
               </el-form-item>
-              <el-form-item label="dimEpi:" prop="dimEpi">
-                <el-input v-model="params.dimEpi" ></el-input>
+              <el-form-item label="topK:" prop="topK">
+                <el-input v-model="params.topK" ></el-input>
               </el-form-item>
-              <el-form-item label="alpha:" prop="alpha">
-                <el-input v-model="params.alpha"></el-input>
+              <el-form-item label="threshold:" prop="threshold">
+                <el-input v-model="params.threshold"></el-input>
               </el-form-item>
               <el-form-item label="数据文件" prop="data_1">
                 <el-upload
                   class="upload-demo"
                   ref="my-upload"
-                  action="http://localhost:8080/MACOEDInputDataUpload"
+                  action="http://localhost:8080/DualWMDRInputDataUpload"
                   name="txtFile"
                   :show-file-list = false
                   :on-preview="handlePreview"
@@ -67,17 +67,23 @@
           </el-col>
           <el-col :span="6" >
             <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-              <el-form-item label="lambda:" prop="lambda">
-                <el-input v-model="params.lambda"></el-input>
+              <el-form-item label="fold:" prop="fold">
+                <el-input v-model="params.fold"></el-input>
               </el-form-item>
-              <el-form-item label="threshold:" prop="threshold">
-                <el-input v-model="params.threshold"></el-input>
+              <el-form-item label="constant:" prop="constant">
+                <el-input v-model="params.constant"></el-input>
               </el-form-item>
-              <el-form-item label="tau:" prop="tau">
-                <el-input v-model="params.tau"></el-input>
+              <el-form-item label="alpha:" prop="alpha">
+                <el-input v-model="params.alpha"></el-input>
               </el-form-item>
-              <el-form-item label="rou:" prop="rou">
-                <el-input v-model="params.rou"></el-input>
+              <el-form-item label="order:" prop="order">
+                <el-input v-model="params.order"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <p></p>
+              </el-form-item>
+              <el-form-item>
+                <p></p>
               </el-form-item>
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
@@ -105,10 +111,10 @@
 
 <script>
 
-import {MACOEDParamsUpload, MACOEDPollResultData} from '../../api/index'
+import {DualWMDRParamsUpload, DualWMDRPollResultData} from '../../api/index'
 
 export default {
-  name: 'MACOEDPage',
+  name: 'DualWMDRPage',
   data () {
     return {
       // 左半部分参数
@@ -116,14 +122,14 @@ export default {
       pics: 'http://img01.jituwang.com/200714/175123-200G405012197.jpg',
       // 右半部分参数
       params: {
-        maxIter: '50',
-        numAnt: '100',
-        dimEpi: '2',
-        alpha: '0.1',
-        lambda: '2',
-        threshold: '0.8',
-        tau: '1',
-        rou: '0.9'
+        percent: '1.0',
+        topT: '200',
+        topK: '100',
+        threshold: '1',
+        fold: '5',
+        constant: '0.5',
+        alpha: '0.25',
+        order: '2'
       },
       paramId: {
         queryId: '',
@@ -137,30 +143,30 @@ export default {
         fileCount: 0
       },
       rules: {
-        maxIter: [
-          { required: true, message: '参数maxIter是必须的', trigger: 'blur' },
-          { min: 1, max: 6, message: '长度在 1 到 6 个字符', trigger: 'blur' }
+        percent: [
+          { required: true, message: '参数percent是必须的', trigger: 'blur' },
+          { min: 1, max: 6, message: '长度在 1 到 2 个字符', trigger: 'blur' }
         ],
-        numAnt: [
-          { required: true, message: '参数numAnt是必须的', trigger: 'change' }
+        topT: [
+          { required: true, message: '参数topT是必须的', trigger: 'change' }
         ],
-        dimEpi: [
-          { required: true, message: '参数dimEpi是必须的', trigger: 'change' }
-        ],
-        alpha: [
-          { required: true, message: '参数alpha是必须的', trigger: 'change' }
-        ],
-        lambda: [
-          { required: true, message: '参数lambda是必须的', trigger: 'change' }
+        topK: [
+          { required: true, message: '参数topK是必须的', trigger: 'change' }
         ],
         threshold: [
           { required: true, message: '参数threshold是必须的', trigger: 'change' }
         ],
-        tau: [
-          { required: true, message: '参数tau是必须的', trigger: 'change' }
+        fold: [
+          { required: true, message: '参数fold是必须的', trigger: 'change' }
         ],
-        rou: [
-          { required: true, message: '参数rou是必须的', trigger: 'change' }
+        constant: [
+          { required: true, message: '参数constant是必须的', trigger: 'change' }
+        ],
+        alpha: [
+          { required: true, message: '参数alpha是必须的', trigger: 'change' }
+        ],
+        order: [
+          { required: true, message: '参数order是必须的', trigger: 'change' }
         ]
       }
     }
@@ -170,7 +176,7 @@ export default {
     // 调用算法方法
     submitForm () {
       // 请求后端
-      MACOEDParamsUpload(this.params).then(res => {
+      DualWMDRParamsUpload(this.params).then(res => {
         console.log(res)
         console.log(res.queryId)
         this.paramId.queryId = res.queryId
@@ -185,13 +191,13 @@ export default {
     // 下载返回结果文件方法
     downloadRes () {
       console.log('downloadRes Method')
-      window.location.href = 'http://localhost:8080/MACOEDResultDataDownload'
+      window.location.href = 'http://localhost:8080/DualWMDRResultDataDownload'
       // 下载文件后，解除禁用
       this.frontParams.readyRun = true
     },
     // 轮询方法，请求后端后自动执行
     pollResultData () {
-      MACOEDPollResultData(this.paramId).then(res => {
+      DualWMDRPollResultData(this.paramId).then(res => {
         console.log(res)
         if (res.finished === 'true') {
           // do something

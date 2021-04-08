@@ -90,8 +90,8 @@ export default {
               title: 'MACOED算法'
             },
             {
-              index: 'upload4',
-              title: '算法6'
+              index: 'DualWMDRPage',
+              title: 'DualWMDR算法'
             },
             {
               index: 'upload5',

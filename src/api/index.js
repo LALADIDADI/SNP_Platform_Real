@@ -210,3 +210,35 @@ export const DualWMDRPollResultData = params => {
     }
   )
 }
+
+// MOMDR params上传
+export const MOMDRParamsUpload = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/MOMDRParamsUpload',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// MOMDR ResultData Download 结果文件下载
+export const MOMDRResultDataDownload = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/MOMDRResultDataDownload',
+      method: 'get'
+    }
+  )
+}
+
+// MOMDR Poll ResultData 结果轮询
+export const MOMDRPollResultData = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/MOMDRPollResultData',
+      method: 'post',
+      params: params
+    }
+  )
+}

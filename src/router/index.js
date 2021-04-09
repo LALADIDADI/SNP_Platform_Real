@@ -49,6 +49,11 @@ export default new Router({
           component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/DualWMDRPage.vue'),
           meta: {title: '算法6'}
         },
+        {// 算法7----MOMDRPage
+          path: '/MOMDRPage',
+          component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/MOMDRPage.vue'),
+          meta: {title: '算法7'}
+        },
         {// 数据生成界面
           path: '/DataGeneration',
           component: () => import(/* webpackChunkName: "icon" */ '../components/page/DataGeneration.vue'),

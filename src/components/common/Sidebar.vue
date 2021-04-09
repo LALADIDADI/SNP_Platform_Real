@@ -94,11 +94,11 @@ export default {
               title: 'DualWMDR算法'
             },
             {
-              index: 'upload5',
-              title: '算法7'
+              index: 'MOMDRPage',
+              title: 'MOMDRPage算法'
             },
             {
-              index: 'upload6',
+              index: 'upload8',
               title: '算法8'
             }
           ]

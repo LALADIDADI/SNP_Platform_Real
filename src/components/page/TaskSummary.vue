@@ -152,7 +152,7 @@ export default {
 
 <style>
 .introduction-box {
-  height: 550px;
+  height: 700px;
 }
 
 .sub-introduction {

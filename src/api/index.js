@@ -242,3 +242,34 @@ export const MOMDRPollResultData = params => {
     }
   )
 }
+// EpiMC params上传
+export const EpiMCParamsUpload = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/EpiMCParamsUpload',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// EpiMC ResultData Download 结果文件下载
+export const EpiMCResultDataDownload = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/EpiMCResultDataDownload',
+      method: 'get'
+    }
+  )
+}
+
+// EpiMC Poll ResultData 结果轮询
+export const EpiMCPollResultData = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/EpiMCPollResultData',
+      method: 'post',
+      params: params
+    }
+  )
+}

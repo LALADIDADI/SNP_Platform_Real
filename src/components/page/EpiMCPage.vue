@@ -5,7 +5,7 @@
         <el-breadcrumb-item>
           <i class="el-icon-lx-calendar"></i> 算法板块
         </el-breadcrumb-item>
-        <el-breadcrumb-item>DualWMDR</el-breadcrumb-item>
+        <el-breadcrumb-item>EpiMC</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="container">
@@ -33,23 +33,23 @@
           </el-col>
           <el-col :span="6">
             <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-              <el-form-item label="percent:" prop="percent">
-                <el-input v-model="params.percent" ></el-input>
+              <el-form-item label="alternativeC:" prop="alternativeC">
+                <el-input v-model="params.alternativeC" ></el-input>
               </el-form-item>
-              <el-form-item label="topT:" prop="topT">
-                <el-input v-model="params.topT" ></el-input>
+              <el-form-item label="kFea:" prop="kFea">
+                <el-input v-model="params.kFea" ></el-input>
               </el-form-item>
-              <el-form-item label="topK:" prop="topK">
-                <el-input v-model="params.topK" ></el-input>
+              <el-form-item label="lambda1:" prop="lambda1">
+                <el-input v-model="params.lambda1" ></el-input>
               </el-form-item>
-              <el-form-item label="threshold:" prop="threshold">
-                <el-input v-model="params.threshold"></el-input>
+              <el-form-item label="lambda2:" prop="lambda2">
+                <el-input v-model="params.lambda2"></el-input>
               </el-form-item>
               <el-form-item label="数据文件" prop="data_1">
                 <el-upload
                   class="upload-demo"
                   ref="my-upload"
-                  action="http://localhost:8080/DualWMDRInputDataUpload"
+                  action="http://localhost:8080/EpiMCInputDataUpload"
                   name="txtFile"
                   :show-file-list = false
                   :on-preview="handlePreview"
@@ -67,17 +67,17 @@
           </el-col>
           <el-col :span="6" >
             <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-              <el-form-item label="fold:" prop="fold">
-                <el-input v-model="params.fold"></el-input>
+              <el-form-item label="topT:" prop="topT">
+                <el-input v-model="params.topT"></el-input>
               </el-form-item>
-              <el-form-item label="constant:" prop="constant">
-                <el-input v-model="params.constant"></el-input>
-              </el-form-item>
-              <el-form-item label="alpha:" prop="alpha">
-                <el-input v-model="params.alpha"></el-input>
+              <el-form-item label="topK:" prop="topK">
+                <el-input v-model="params.topK"></el-input>
               </el-form-item>
               <el-form-item label="order:" prop="order">
                 <el-input v-model="params.order"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <p></p>
               </el-form-item>
               <el-form-item>
                 <p></p>
@@ -111,10 +111,10 @@
 
 <script>
 
-import {DualWMDRParamsUpload, DualWMDRPollResultData} from '../../api/index'
+import {EpiMCParamsUpload, EpiMCPollResultData} from '../../api/index'
 
 export default {
-  name: 'DualWMDRPage',
+  name: 'EpiMCPage',
   data () {
     return {
       // 左半部分参数
@@ -122,13 +122,12 @@ export default {
       pics: '../../../static/image/ycy.jpg',
       // 右半部分参数
       params: {
-        percent: '1.0',
-        topT: '200',
-        topK: '100',
-        threshold: '1',
-        fold: '5',
-        constant: '0.5',
-        alpha: '0.25',
+        alternativeC: '4',
+        kFea: '3',
+        lambda1: '10',
+        lambda2: '10',
+        topT: '10',
+        topK: '200',
         order: '2'
       },
       paramId: {
@@ -143,27 +142,24 @@ export default {
         fileCount: 0
       },
       rules: {
-        percent: [
-          { required: true, message: '参数percent是必须的', trigger: 'blur' },
-          { min: 1, max: 6, message: '长度在 1 到 2 个字符', trigger: 'blur' }
+        alternativeC: [
+          { required: true, message: '参数alternativeC是必须的', trigger: 'blur' },
+          { min: 1, max: 2, message: '长度在 1 到 2 个字符', trigger: 'blur' }
+        ],
+        kFea: [
+          { required: true, message: '参数kFea是必须的', trigger: 'change' }
+        ],
+        lambda1: [
+          { required: true, message: '参数lambda1是必须的', trigger: 'change' }
+        ],
+        lambda2: [
+          { required: true, message: '参数lambda2是必须的', trigger: 'change' }
         ],
         topT: [
           { required: true, message: '参数topT是必须的', trigger: 'change' }
         ],
         topK: [
           { required: true, message: '参数topK是必须的', trigger: 'change' }
-        ],
-        threshold: [
-          { required: true, message: '参数threshold是必须的', trigger: 'change' }
-        ],
-        fold: [
-          { required: true, message: '参数fold是必须的', trigger: 'change' }
-        ],
-        constant: [
-          { required: true, message: '参数constant是必须的', trigger: 'change' }
-        ],
-        alpha: [
-          { required: true, message: '参数alpha是必须的', trigger: 'change' }
         ],
         order: [
           { required: true, message: '参数order是必须的', trigger: 'change' }
@@ -176,7 +172,7 @@ export default {
     // 调用算法方法
     submitForm () {
       // 请求后端
-      DualWMDRParamsUpload(this.params).then(res => {
+      EpiMCParamsUpload(this.params).then(res => {
         console.log(res)
         console.log(res.queryId)
         this.paramId.queryId = res.queryId
@@ -191,13 +187,13 @@ export default {
     // 下载返回结果文件方法
     downloadRes () {
       console.log('downloadRes Method')
-      window.location.href = 'http://localhost:8080/DualWMDRResultDataDownload'
+      window.location.href = 'http://localhost:8080/EpiMCResultDataDownload'
       // 下载文件后，解除禁用
       this.frontParams.readyRun = true
     },
     // 轮询方法，请求后端后自动执行
     pollResultData () {
-      DualWMDRPollResultData(this.paramId).then(res => {
+      EpiMCPollResultData(this.paramId).then(res => {
         console.log(res)
         if (res.finished === 'true') {
           // do something

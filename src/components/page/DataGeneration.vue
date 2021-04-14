@@ -153,7 +153,7 @@ export default {
   line-height: 60px;
 }
 .introduction-box{
-  height: 500px;
+  height: 700px;
 }
 
 .el-carousel__item h3 {

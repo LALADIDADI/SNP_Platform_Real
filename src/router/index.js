@@ -54,6 +54,11 @@ export default new Router({
           component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/MOMDRPage.vue'),
           meta: {title: '算法7'}
         },
+        {// 算法8----EpiMCPage
+          path: '/EpiMCPage',
+          component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/EpiMCPage.vue'),
+          meta: {title: '算法8'}
+        },
         {// 数据生成界面
           path: '/DataGeneration',
           component: () => import(/* webpackChunkName: "icon" */ '../components/page/DataGeneration.vue'),

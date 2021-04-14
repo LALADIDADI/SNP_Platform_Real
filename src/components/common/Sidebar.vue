@@ -98,8 +98,8 @@ export default {
               title: 'MOMDRPage算法'
             },
             {
-              index: 'upload8',
-              title: '算法8'
+              index: 'EpiMCPage',
+              title: 'EpiMCPage算法'
             }
           ]
         },

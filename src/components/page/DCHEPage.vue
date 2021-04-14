@@ -256,7 +256,7 @@ export default {
 
 <style>
 .introduction-box{
-  height: 500px;
+  height: 700px;
 }
 .grid-content {
   border-radius: 4px;

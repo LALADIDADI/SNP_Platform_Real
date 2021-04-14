@@ -129,7 +129,7 @@ export default {
     return {
       // 左半部分参数
       activeName: '1',
-      pics: 'http://img01.jituwang.com/200714/175123-200G405012197.jpg',
+      pics: '../../../static/image/ycy.jpg',
       // 右半部分参数
       params: {
         sigThreshold: '0.05',
@@ -294,7 +294,7 @@ export default {
 
 <style>
 .introduction-box{
-  height: 500px;
+  height: 700px;
 }
 .grid-content {
   border-radius: 4px;

@@ -74,7 +74,7 @@ export default {
   data () {
     return {
       activeName: '1',
-      pics: ['http://img01.jituwang.com/200714/175123-200G405012197.jpg']
+      pics: ['../../../static/image/ycy.jpg']
     }
   },
 
@@ -88,7 +88,7 @@ export default {
 
 <style>
 .introduction-box{
-  height: 550px;
+  height: 700px;
 }
 .sub-introduction{
   height: 25px;

@@ -12,74 +12,45 @@
         <div class="container">
           <div class="introduction-box">
             <el-row :gutter="20">
-              <el-col :span="12">
+              <el-col :span="10">
                 <el-collapse v-model="activeNames" @change="handleChange">
                   <el-collapse-item title="模拟数据模型展示" name="1">
-                    <el-table
-                      :data="tableData"
-                      height="150"
-                      border
-                      style="width: 100%">
-                      <el-table-column
-                        prop="date"
-                        label="参数"
-                        width="180">
-                      </el-table-column>
-                      <el-table-column
-                        prop="name"
-                        label="参数简介"
-                        width="180">
-                      </el-table-column>
-                      <el-table-column
-                        prop="address"
-                        label="参数实例">
-                      </el-table-column>
-                    </el-table>
-                  </el-collapse-item>
-                  <el-collapse-item title="模拟数据信息" name="2">
-                    <el-table
-                      :data="tableData_2"
-                      height="150"
-                      border
-                      style="width: 100%">
-                      <el-table-column
-                        prop="parameter"
-                        label="属性"
-                        width="180">
-                      </el-table-column>
-                      <el-table-column
-                        prop="count"
-                        label="个数">
-                      </el-table-column>
-                    </el-table>
+                    <el-image :src="pic1" ></el-image>
                   </el-collapse-item>
                 </el-collapse>
               </el-col>
-              <el-col :span="12" :push="1">
+              <el-col :span="10" :push="1">
                 <el-row>
                   <el-col :span="24"><div class="grid-content ">
-                    <el-button type="primary" :loading="false">下载数据压缩包</el-button>
+                    <el-alert
+                      title="使用GAMETES"
+                      type="info"
+                      description="我们推荐您使用软件GAMETES来生成您所需要的数据。通过GAMETES，您可以随时生成不同的模拟数据来调试您的算法。"
+                      :closable="false"
+                      show-icon>
+                    </el-alert>
                   </div></el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="24"><div class="grid-content ">
+                    <el-button type="primary" :loading="false" @click="downloadUserManual" >用户手册下载</el-button>
+                    <el-button type="primary" :loading="false" @click="downloadGameTes" >源文件下载</el-button>
                   </div></el-col>
                 </el-row>
                 <el-row>
-                  <el-col :span="12"><div class="grid-content">
-                    <el-upload
-                      class="upload-demo"
-                      action="https://jsonplaceholder.typicode.com/posts/"
-                      :on-preview="handlePreview"
-                      :on-remove="handleRemove"
-                      :before-remove="beforeRemove"
-                      multiple
-                      :limit="3"
-                      :on-exceed="handleExceed"
-                      :file-list="fileList">
-                      <el-button size="small" type="primary">个人数据上传</el-button>
-                      <div slot="tip" class="el-upload__tip">请上传txt文件，且不超过500MB</div>
-                    </el-upload>
+                  <el-col :span="24"><div class="grid-content ">
+                    <el-alert
+                      title="当然，您也可以直接调起程序。"
+                      type="info"
+                      description="点击下方按钮，则会调起本软件中的嵌入的GAMETES。"
+                      :closable="false"
+                      >
+                    </el-alert>
+                  </div></el-col>
+                </el-row>
+                <el-row>
+                  <el-col :span="24"><div class="grid-content ">
+                    <el-button type="primary" :loading="false" @click="openGameTes" >调起程序</el-button>
                   </div></el-col>
                 </el-row>
               </el-col>
@@ -92,53 +63,37 @@
 </template>
 
 <script>
+
+import {OpenGameTes} from '../../api/addIndex'
+
 export default {
   name: 'DataGeneration',
   data () {
     return {
       activeNames: ['1'],
-      tableData: [{
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }],
-      tableData_2: [{
-        parameter: 'SNP',
-        count: '10'
-      }, {
-        parameter: 'case',
-        count: '12'
-      }, {
-        parameter: 'control',
-        count: '5'
-      }],
-      fileList: [{name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+      pic1: '../../../static/image/data_model2.png'
     }
   },
   methods: {
+    // 向后端发起调用GAMETES2.0
+    openGameTes () {
+      OpenGameTes().then(res => {
+        console.log(res)
+      })
+    },
+    // 提供用户手册的下载
+    downloadUserManual () {
+      console.log('downloadUserManual Method')
+      window.location.href = 'http://localhost:8080/downloadUserManual'
+    },
+    // 提供源文件的下载
+    downloadGameTes () {
+      console.log('downloadGameTes Method')
+      window.location.href = 'http://localhost:8080/downloadGameTes'
+    },
+    // 左边折叠栏展示方法
     handleChange (val) {
       console.log(val)
-    },
-    // 数据上传方法
-    handleRemove (file, fileList) {
-      console.log(file, fileList)
-    },
-    handlePreview (file) {
-      console.log(file)
-    },
-    handleExceed (files, fileList) {
-      this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
-    },
-    beforeRemove (file, fileList) {
-      return this.$confirm(`确定移除该文件吗？`)
     }
   }
 }
@@ -187,12 +142,12 @@ export default {
   height: 100px;
 }
 
-/*布局*/
+/*布局,这行报错的代码千万别动*/
 .el-row {
   margin-bottom: 20px;
-&:last-child {
-   margin-bottom: 0;
- }
+}
+.el-row  :last-child {
+  margin-bottom: 0;
 }
 .el-col {
   border-radius: 4px;

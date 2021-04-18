@@ -103,7 +103,7 @@
             <el-row type="flex" justify="left">
               <el-button type="primary" @click="submitForm()" :disabled = !frontParams.readyRun>运行算法</el-button>
               <el-button type="primary" @click="downloadRes()" :disabled = !paramId.finished plain>结果下载</el-button>
-<!--              <el-button @click="stopPoll()">测试按钮</el-button>-->
+              <el-button @click="batchRun()" type="success" plain>加入批处理</el-button>
             </el-row>
           </el-col>
         </el-row>
@@ -115,6 +115,7 @@
 <script>
 
 import {DCHEParamsUpload, DCHEPollResultData} from '../../api/index'
+import {DCHEBatchRequest, DCHEJustSetParams} from '../../api/addIndex'
 
 export default {
   name: 'DCHEPage',
@@ -156,6 +157,17 @@ export default {
   },
 
   methods: {
+    // 加入批处理的算法
+    batchRun () {
+      console.log('开始批处理')
+      DCHEBatchRequest(this.params).then(res => {
+        console.log('DCHE批处理页面显示参数提交')
+        console.log(res)
+      })
+      DCHEJustSetParams(this.params).then(res => {
+        console.log('DCHE批处理基本参数提交')
+      })
+    },
     // 调用算法方法
     submitForm () {
       // 请求后端

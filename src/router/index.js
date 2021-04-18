@@ -71,7 +71,7 @@ export default new Router({
         },
         {// SNP查询界面
           path: '/SNPInquery',
-          component: () => import(/* webpackChunkName: "icon" */ '../components/page/SNPInquery.vue'),
+          component: () => import(/* webpackChunkName: "icon" */ '../components/page/SNPQuery.vue'),
           meta: {title: 'SNP查询界面'}
         },
         {// 任务控制界面

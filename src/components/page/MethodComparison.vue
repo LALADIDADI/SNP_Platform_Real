@@ -95,15 +95,17 @@ export default {
         datasets: [
           {
             label: '算法1',
-            fillColor: 'rgba(241, 49, 74, 0.5)',
+            fillColor: 'rgba(65, 105, 225, 0.8)',
             data: [4, 7, 2, 8, 1]
           },
           {
             label: '算法2',
+            fillColor: 'rgba(106, 90, 205, 0.8)',
             data: [8, 9, 7, 5, 7]
           },
           {
             label: '算法3',
+            fillColor: 'rgba(135, 206, 235, 0.8)',
             data: [3, 1, 7, 4, 3]
           }
         ]

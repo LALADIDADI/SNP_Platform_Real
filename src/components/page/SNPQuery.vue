@@ -42,9 +42,15 @@
             </el-row>
           </el-col>
           <el-col :span="17" :push="1">
-            <iframe :src="url" width="800" height="550" frameborder="1" scrolling="auto" seamless></iframe>
-            <div class="grid-content ">
-          </div></el-col>
+<!--            <iframe :src="url" width="800" height="550" frameborder="1" scrolling="auto" seamless></iframe>-->
+<!--            <div class="grid-content ">-->
+<!--          </div>-->
+            <div style="width:800px;height:730px;overflow:hidden;border:0px">
+              <div style="width:500px;height:730px;margin:-255px 0px 0px -160px;">
+                <iframe :src="url" width="950" height="730" frameborder="1" scrolling="auto" ></iframe>
+              </div>
+            </div>
+          </el-col>
         </el-row>
       </div>
     </div>

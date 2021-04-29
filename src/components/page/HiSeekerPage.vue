@@ -22,13 +22,21 @@
                 <el-image :src="pics"></el-image>
               </el-collapse-item>
               <el-collapse-item title="参数描述 Parameter Description" name="3">
-                <div>简化流程：设计简洁直观的操作流程；</div>
-                <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
-                <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
+                <div><strong>threshold:</strong> the_significance_level(default = 0.05)</div>
+                <div><strong>the_scale_factor:</strong> to adjust for the total number of retained pairwise SNPs(default = 10000)</div>
+                <div><strong>rou:</strong> evaporation rate in Ant Colony Optimizaion(default = 0.05)</div>
+                <div><strong>phe:</strong> initial pheromone level_for each locus(default = 100)</div>
+                <div><strong>alpha:</strong> weight given to pheromone deposited by ants(default = 1.00)</div>
+                <div><strong>iAntCount:</strong> number of ants(default = 500)</div>
+                <div><strong>iterCount:</strong> number of iterations(default = 100)</div>
+                <div><strong>kLociSet:</strong> number of pairwise SNPs selected by an ant in each iteration(default = 3)</div>
+                <div><strong>kEpiModel:</strong> number of SNPs in an epistatic interaction(default = 4)</div>
+                <div><strong>kTopModel:</strong> number of top ranking haplotypes in the ACO search stage(default = 1000)</div>
+                <div><strong>topK:</strong> number of the most significant interactions(default = 100)</div>
+                <div><strong>typeOfSearch:</strong> 0 for exhuastive search, 1 for ACO search(default = 1)</div>
               </el-collapse-item>
               <el-collapse-item title="数据样例 Data sample" name="4">
-                <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
-                <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+                <div><el-image :src="dataFormatPic"></el-image></div>
               </el-collapse-item>
             </el-collapse>
           </el-col>
@@ -131,7 +139,8 @@ export default {
     return {
       // 左半部分参数
       activeName: '1',
-      pics: '../../../static/image/ycy.jpg',
+      pics: '../../../static/image/HiSeekerFlow.png',
+      dataFormatPic: '../../../static/image/dataFormat.png',
       // 右半部分参数
       params: {
         threshold: '0.05',
@@ -150,7 +159,7 @@ export default {
       paramId: {
         queryId: '',
         finished: false,
-        progress: 0
+        progress: 66.7
       },
       frontParams: {
         readyRun: true
@@ -182,6 +191,9 @@ export default {
           { required: true, message: '参数iterCount是必须的', trigger: 'change' }
         ],
         kLociSet: [
+          { required: true, message: '参数kLociSet是必须的', trigger: 'change' }
+        ],
+        kTopModel: [
           { required: true, message: '参数kLociSet是必须的', trigger: 'change' }
         ],
         kEpiModel: [

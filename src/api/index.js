@@ -274,3 +274,91 @@ export const EpiMCPollResultData = params => {
     }
   )
 }
+
+// HiSeeker ResultShow 结果展示
+export const HiSeekerResultShow = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/HiSeekerResultShow',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// ClusterMI ResultShow 结果展示
+export const ClusterMIResultShow = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/ClusterMIResultShow',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// DCHE ResultShow 结果展示
+export const DCHEResultShow = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/DCHEResultShow',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// DECMDR ResultShow 结果展示
+export const DECMDRResultShow = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/DECMDRResultShow',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// DualWMDR ResultShow 结果展示
+export const DualWMDRResultShow = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/DualWMDRResultShow',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// MACOED ResultShow 结果展示
+export const MACOEDResultShow = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/MACOEDResultShow',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// MOMDR ResultShow 结果展示
+export const MOMDRResultShow = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/MOMDRResultShow',
+      method: 'post',
+      params: params
+    }
+  )
+}
+
+// EpiMC ResultShow 结果展示
+export const EpiMCResultShow = params => {
+  return request(
+    {
+      url: 'http://localhost:8080/EpiMCResultShow',
+      method: 'post',
+      params: params
+    }
+  )
+}

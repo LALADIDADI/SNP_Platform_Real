@@ -93,6 +93,7 @@
             </el-form>
             <el-row type="flex" justify="left">
               <el-button type="primary" @click="submitForm()" :disabled = !frontParams.readyRun>运行算法</el-button>
+              <el-button type="primary" @click="downloadShow()" :disabled = !paramId.finished plain>结果展示</el-button>
               <el-button type="primary" @click="downloadRes()" :disabled = !paramId.finished plain>结果下载</el-button>
               <el-button @click="batchRun()" type="success" plain>加入批处理</el-button>
             </el-row>
@@ -100,18 +101,30 @@
         </el-row>
       </div>
     </div>
+    <el-drawer
+      title="结果展示"
+      :visible.sync="drawer"
+      direction="rtl"
+      size="30%">
+      <el-table :data="tableData">
+        <el-table-column property="resLine" label="Result-UI"></el-table-column>
+      </el-table>
+    </el-drawer>
   </div>
 </template>
 
 <script>
 
-import {MACOEDParamsUpload, MACOEDPollResultData} from '../../api/index'
+import {MACOEDParamsUpload, MACOEDPollResultData, MACOEDResultShow} from '../../api/index'
 import {MACOEDBatchRequest, MACOEDJustSetParams} from '../../api/addIndex'
 
 export default {
   name: 'MACOEDPage',
   data () {
     return {
+      // 结果展示，抽屉参数
+      drawer: false,
+      tableData: [],
       // 左半部分参数
       activeName: '1',
       pics: '../../../static/image/ycy.jpg',
@@ -168,6 +181,25 @@ export default {
   },
 
   methods: {
+    // 结果展示方法
+    downloadShow () {
+      this.drawer = true
+      this.tableData = []
+      console.log('即将打开抽屉展示结果')
+      MACOEDResultShow(this.paramId).then(res => {
+        console.log('MACOED结果展示返回')
+        // 将数据写入tableData
+        let i
+        console.log(res)
+        for (i = 0; i < res.length; i++) {
+          if (res[i] != null) {
+            this.tableData.push(res[i])
+          }
+        }
+      })
+      // 结果展示后，解除禁用
+      this.frontParams.readyRun = true
+    },
     // 加入批处理的算法
     batchRun () {
       console.log('开始批处理')
@@ -177,6 +209,11 @@ export default {
       })
       MACOEDJustSetParams(this.params).then(res => {
         console.log('MACOED批处理基本参数提交')
+      })
+      // 提示
+      this.$message({
+        message: `加入批处理成功`,
+        type: `success`
       })
     },
     // 调用算法方法

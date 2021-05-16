@@ -14,20 +14,29 @@
           <el-col :span="9">
             <el-collapse v-model="activeName" accordion>
               <el-collapse-item title="算法简介 Algorithm introduction" name="1">
-                <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-                <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+                <div>ClusterMI为两阶段算法：</div>
+                <div>在筛选阶段，ClusterMI按照SNPs间的关联性强弱将其划分到多个簇中进行快速的分析筛选；</div>
+                <div>在搜索阶段，ClusterMI根据保留两位点组合的数量大小采用不同的搜索策略。</div>
               </el-collapse-item>
               <el-collapse-item title="算法流程图 Algorithm flowchart" name="2">
                 <el-image :src="pics"></el-image>
               </el-collapse-item>
               <el-collapse-item title="参数描述 Parameter Description" name="3">
-                <div>简化流程：设计简洁直观的操作流程；</div>
-                <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
-                <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
+                <div><strong>sigThreshold:</strong> the_significance_level(default = 0.05)</div>
+                <div><strong>kCluster:</strong> number of clusters(default = 3)</div>
+                <div><strong>rou:</strong> evaporation rate in Ant Colony Optimizaion(default = 0.05)</div>
+                <div><strong>phe:</strong> initial pheromone level_for each locus(default = 100)</div>
+                <div><strong>alpha:</strong> weight given to pheromone deposited by ants(default = 1.00)</div>
+                <div><strong>iAntCount:</strong> number of ants(default = 500)</div>
+                <div><strong>iterCount:</strong> number of iterations(default = 100)</div>
+                <div><strong>kLociSet:</strong> number of pairwise SNPs selected by an ant in each iteration(default = 3)</div>
+                <div><strong>kEpiModel:</strong> number of SNPs in an epistatic interaction(default = 4)</div>
+                <div><strong>kTopModel:</strong> number of top ranking haplotypes in the ACO search stage(default = 1000)</div>
+                <div><strong>topK:</strong> number of the most significant interactions(default = 100)</div>
+                <div><strong>searchType:</strong> 0 for exhuastive search, 1 for ACO search(default = 1)</div>
               </el-collapse-item>
               <el-collapse-item title="数据样例 Data sample" name="4">
-                <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
-                <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+                <div><el-image :src="dataFormatPic"></el-image></div>
               </el-collapse-item>
             </el-collapse>
           </el-col>
@@ -147,7 +156,8 @@ export default {
       tableData: [],
       // 左半部分参数
       activeName: '1',
-      pics: '../../../static/image/ycy.jpg',
+      pics: '../../../static/image/ClusterMIChartFlow.png',
+      dataFormatPic: '../../../static/image/dataFormat.png',
       // 右半部分参数
       params: {
         sigThreshold: '0.05',

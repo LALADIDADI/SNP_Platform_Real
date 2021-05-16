@@ -14,21 +14,18 @@
           <el-col :span="9">
             <el-collapse v-model="activeName" accordion>
               <el-collapse-item title="算法简介 Algorithm introduction" name="1">
-                <div>HiSeeker为两阶段算法：</div>
-                <div>在筛选阶段，HiSeeker结合卡方检验和逻辑回归对两位点组合进行快速的分析筛选；</div>
-                <div>在搜索阶段，HiSeeker根据保留两位点组合的数量大小采用不同的搜索策略。</div>
-              </el-collapse-item>
-              <el-collapse-item title="算法流程图 Algorithm flowchart" name="2">
-                <el-image :src="pics"></el-image>
+                <div>DECMDR是一种采用基于分类的多因素降维(CMDR)并结合差分进化(DE)的算法，来计算和检测全基因组多位点上位性相互作用。</div>
               </el-collapse-item>
               <el-collapse-item title="参数描述 Parameter Description" name="3">
-                <div>简化流程：设计简洁直观的操作流程；</div>
-                <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
-                <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
+                <div><strong>seed:</strong> the seed (default = 1)</div>
+                <div><strong>population:</strong>  the population size (default = 100)</div>
+                <div><strong>generation:</strong> the max generation (default = 300)</div>
+                <div><strong>mutationFactor:</strong> the mutation factor (default = 0.5)</div>
+                <div><strong>CRFactor:</strong> the recombination CR factor (default = 0.5)</div>
+                <div><strong>order:</strong>  the order of SNP-SNP interaction (default = 2)</div>
               </el-collapse-item>
               <el-collapse-item title="数据样例 Data sample" name="4">
-                <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
-                <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+                <div><el-image :src="dataFormatPic"></el-image></div>
               </el-collapse-item>
             </el-collapse>
           </el-col>
@@ -122,7 +119,7 @@ export default {
       tableData: [],
       // 左半部分参数
       activeName: '1',
-      pics: '../../../static/image/ycy.jpg',
+      dataFormatPic: '../../../static/image/tailFormat.png',
       // 右半部分参数
       params: {
         seed: '1',

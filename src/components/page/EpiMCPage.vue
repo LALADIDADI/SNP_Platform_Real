@@ -14,20 +14,24 @@
           <el-col :span="9">
             <el-collapse v-model="activeName" accordion>
               <el-collapse-item title="算法简介 Algorithm introduction" name="1">
-                <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-                <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+                <div>EpiMC两阶段算法：</div>
+                <div>在第一阶段，EpiMC提出了一种基于矩阵分解的方法将所有的snp划分为不同的簇</div>
+                <div>在第二阶段，EpiMC使用穷举搜索策略来计算检测全基因组多位点上位性相互作用。</div>
               </el-collapse-item>
               <el-collapse-item title="算法流程图 Algorithm flowchart" name="2">
                 <el-image :src="pics"></el-image>
               </el-collapse-item>
               <el-collapse-item title="参数描述 Parameter Description" name="3">
-                <div>简化流程：设计简洁直观的操作流程；</div>
-                <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
-                <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
+                <div><strong>alternativeC:</strong> the number of the alternative clusterings(default = 4)</div>
+                <div><strong>kFea:</strong> the number of cluster in each clusterings(default = 3)</div>
+                <div><strong>lambda1:</strong> the superparamter controls the grouping effect of multiple clusterings(default = 10)</div>
+                <div><strong>lambda2:</strong> the superparamter controls the diversity of multiple clusterings(default = 10)</div>
+                <div><strong>topT:</strong> the number of the obtaining high-quality SNPs(default = 10)</div>
+                <div><strong>topK:</strong> the number of the SNP combinations(default = 200)</div>
+                <div><strong>order:</strong> the order of SNP combinations(default = 2)</div>
               </el-collapse-item>
               <el-collapse-item title="数据样例 Data sample" name="4">
-                <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
-                <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+                <div><el-image :src="dataFormatPic"></el-image></div>
               </el-collapse-item>
             </el-collapse>
           </el-col>
@@ -137,7 +141,8 @@ export default {
       tableData: [],
       // 左半部分参数
       activeName: '1',
-      pics: '../../../static/image/ycy.jpg',
+      pics: '../../../static/image/EpiMC.png',
+      dataFormatPic: '../../../static/image/IDTailFormat.png',
       // 右半部分参数
       params: {
         alternativeC: '4',

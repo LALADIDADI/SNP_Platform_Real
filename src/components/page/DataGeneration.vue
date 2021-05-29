@@ -145,9 +145,9 @@ export default {
 /*布局,这行报错的代码千万别动*/
 .el-row {
   margin-bottom: 20px;
-}
-.el-row  :last-child {
-  margin-bottom: 0;
+&:last-child {
+   margin-bottom: 0;
+ }
 }
 .el-col {
   border-radius: 4px;

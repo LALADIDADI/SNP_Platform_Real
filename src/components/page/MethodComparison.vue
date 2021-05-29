@@ -38,7 +38,7 @@
             </el-row>
             <el-row :gutter="10">
               <el-col :span="4" >
-                <el-input v-model="options1.title.text" placeholder="名称"></el-input>
+                <el-input v-model="options1.title.text" placeholder="算法名"></el-input>
               </el-col>
               <div v-for="(i,item) in options1.labels.length" :key="item">
                 <el-col :span="4">
@@ -91,20 +91,20 @@ export default {
           text: 'chart'
         },
         bgColor: '#fbfbfb',
-        labels: ['属性1', '属性2', '属性3', '属性4', '属性5'],
+        labels: ['MAFs=0.1', 'MAFs=0.2', 'MAFs=0.3', 'MAFs=0.4', 'MAFs=0.5'],
         datasets: [
           {
-            label: '算法1',
+            label: 'HiSeeker',
             fillColor: 'rgba(65, 105, 225, 0.8)',
             data: [4, 7, 2, 8, 1]
           },
           {
-            label: '算法2',
+            label: 'ClusterMI',
             fillColor: 'rgba(106, 90, 205, 0.8)',
             data: [8, 9, 7, 5, 7]
           },
           {
-            label: '算法3',
+            label: 'DCHE',
             fillColor: 'rgba(135, 206, 235, 0.8)',
             data: [3, 1, 7, 4, 3]
           }

@@ -62,6 +62,7 @@
             </el-form>
           </el-col>
           <el-col :span="7" >
+            <el-row type="flex" justify="left">
             <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
               <el-form-item>
                 <p></p>
@@ -99,11 +100,15 @@
                 <p></p>
               </el-form-item>
             </el-form>
+            </el-row>
             <el-row type="flex" justify="left">
               <el-button type="primary" @click="submitForm()" :disabled = !frontParams.readyRun>运行算法</el-button>
               <el-button type="primary" @click="downloadShow()" :disabled = !paramId.finished plain>结果展示</el-button>
               <el-button type="primary" @click="downloadRes()" :disabled = !paramId.finished plain>结果下载</el-button>
               <el-button @click="batchRun()" type="success" plain>加入批处理</el-button>
+            </el-row>
+            <el-row type="flex" justify="left" class = "secondRow">
+              <el-button type="warning" @click="forceStop()" plain>强制终止</el-button>
             </el-row>
           </el-col>
         </el-row>
@@ -127,7 +132,7 @@
 
 <script>
 
-import {DCHEParamsUpload, DCHEPollResultData, DCHEResultShow} from '../../api/index'
+import {DCHEParamsUpload, DCHEPollResultData, DCHEResultShow, DCHEForceStop} from '../../api/index'
 import {DCHEBatchRequest, DCHEJustSetParams} from '../../api/addIndex'
 
 export default {
@@ -173,6 +178,17 @@ export default {
   },
 
   methods: {
+    // 强制终止方法
+    forceStop () {
+      DCHEForceStop().then(res => {
+        console.log('DCHE进程已全部停止')
+        // 提示
+        this.$message({
+          message: `DCHE进程已全部停止`,
+          type: `success`
+        })
+      })
+    },
     // 结果展示方法
     downloadShow () {
       this.drawer = true
@@ -370,5 +386,9 @@ export default {
 
 .box-card {
   width: 270px;
+}
+/*自定义*/
+.secondRow {
+  margin-top: 8px;
 }
 </style>

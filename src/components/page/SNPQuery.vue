@@ -84,7 +84,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 /*页面微调*/
 .myLink{
   margin-top: 10px;

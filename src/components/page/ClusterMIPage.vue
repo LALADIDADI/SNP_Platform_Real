@@ -75,6 +75,7 @@
             </el-form>
           </el-col>
           <el-col :span="5" >
+            <el-row type="flex" justify="left">
             <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
               <el-form-item label="alpha:" prop="alpha">
                 <el-input v-model="params.alpha"></el-input>
@@ -100,11 +101,15 @@
                 <p></p>
               </el-form-item>
             </el-form>
+            </el-row>
             <el-row type="flex" justify="left">
               <el-button type="primary" @click="submitForm()" :disabled = !frontParams.readyRun>运行算法</el-button>
               <el-button type="primary" @click="downloadShow()" :disabled = !paramId.finished plain>结果展示</el-button>
               <el-button type="primary" @click="downloadRes()" :disabled = !paramId.finished plain>结果下载</el-button>
               <el-button @click="batchRun()" type="success" plain>加入批处理</el-button>
+            </el-row>
+            <el-row type="flex" justify="left" class = "secondRow">
+              <el-button type="warning" @click="forceStop()" plain>强制终止</el-button>
             </el-row>
           </el-col>
           <el-col :span="5">
@@ -144,7 +149,7 @@
 
 <script>
 
-import {ClusterMIParamsUpload, ClusterMIPollResultData, ClusterMIResultShow} from '../../api/index'
+import {ClusterMIParamsUpload, ClusterMIPollResultData, ClusterMIResultShow, ClusterMIForceStop} from '../../api/index'
 import {ClusterMIBatchRequest, ClusterMIJustSetParams} from '../../api/addIndex'
 
 export default {
@@ -224,6 +229,17 @@ export default {
   },
 
   methods: {
+    // 强制终止方法
+    forceStop () {
+      ClusterMIForceStop().then(res => {
+        console.log('ClusterMI进程已全部停止')
+        // 提示
+        this.$message({
+          message: `ClusterMI进程已全部停止`,
+          type: `success`
+        })
+      })
+    },
     // 结果展示方法
     downloadShow () {
       this.drawer = true
@@ -395,5 +411,9 @@ export default {
 .avatar{
   width: 100px;
   height: 100px;
+}
+/*自定义*/
+.secondRow {
+  margin-top: 8px;
 }
 </style>

@@ -69,6 +69,7 @@
             </el-form>
           </el-col>
           <el-col :span="6" >
+            <el-row type="flex" justify="left">
             <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
               <el-form-item label="fold:" prop="fold">
                 <el-input v-model="params.fold"></el-input>
@@ -94,11 +95,15 @@
                 <p></p>
               </el-form-item>
             </el-form>
+            </el-row>
             <el-row type="flex" justify="left">
               <el-button type="primary" @click="submitForm()" :disabled = !frontParams.readyRun>运行算法</el-button>
               <el-button type="primary" @click="downloadShow()" :disabled = !paramId.finished plain>结果展示</el-button>
               <el-button type="primary" @click="downloadRes()" :disabled = !paramId.finished plain>结果下载</el-button>
               <el-button @click="batchRun()" type="success" plain>加入批处理</el-button>
+            </el-row>
+            <el-row type="flex" justify="left" class = "secondRow">
+              <el-button type="warning" @click="forceStop()" plain>强制终止</el-button>
             </el-row>
           </el-col>
         </el-row>
@@ -121,7 +126,7 @@
 
 <script>
 
-import {DualWMDRParamsUpload, DualWMDRPollResultData, DualWMDRResultShow} from '../../api/index'
+import {DualWMDRParamsUpload, DualWMDRPollResultData, DualWMDRResultShow, DualWMDRForceStop} from '../../api/index'
 import {DualWMDRBatchRequest, DualWMDRJustSetParams} from '../../api/addIndex'
 
 export default {
@@ -188,6 +193,17 @@ export default {
   },
 
   methods: {
+    // 强制终止方法
+    forceStop () {
+      DualWMDRForceStop().then(res => {
+        console.log('DualWMDR进程已全部停止')
+        // 提示
+        this.$message({
+          message: `DualWMDR进程已全部停止`,
+          type: `success`
+        })
+      })
+    },
     // 结果展示方法
     downloadShow () {
       this.drawer = true
@@ -362,5 +378,9 @@ export default {
 .avatar{
   width: 100px;
   height: 100px;
+}
+/*自定义*/
+.secondRow {
+  margin-top: 8px;
 }
 </style>

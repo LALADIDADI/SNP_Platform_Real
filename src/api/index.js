@@ -362,3 +362,83 @@ export const EpiMCResultShow = params => {
     }
   )
 }
+
+// HiSeeker ForceStop 强制停止
+export const HiSeekerForceStop = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/HiSeekerForceStop',
+      method: 'get'
+    }
+  )
+}
+
+// ClusterMI ForceStop 强制停止
+export const ClusterMIForceStop = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/ClusterMIForceStop',
+      method: 'get'
+    }
+  )
+}
+
+// DCHE ForceStop 强制停止
+export const DCHEForceStop = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/DCHEForceStop',
+      method: 'get'
+    }
+  )
+}
+
+// DECMDR ForceStop 强制停止
+export const DECMDRForceStop = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/DECMDRForceStop',
+      method: 'get'
+    }
+  )
+}
+
+// MACOED ForceStop 强制停止
+export const MACOEDForceStop = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/MACOEDForceStop',
+      method: 'get'
+    }
+  )
+}
+
+// MOMDR ForceStop 强制停止
+export const MOMDRForceStop = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/MOMDRForceStop',
+      method: 'get'
+    }
+  )
+}
+
+// EpiMC ForceStop 强制停止
+export const EpiMCForceStop = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/EpiMCForceStop',
+      method: 'get'
+    }
+  )
+}
+
+// DualWMDR ForceStop 强制停止
+export const DualWMDRForceStop = () => {
+  return request(
+    {
+      url: 'http://localhost:8080/DualWMDRForceStop',
+      method: 'get'
+    }
+  )
+}

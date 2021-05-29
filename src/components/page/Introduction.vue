@@ -40,7 +40,7 @@
             </el-collapse>
           </el-col>
           <el-col :span="12">
-            <div class="grid-content ql-bg-green">
+            <div class="ql-bg-green">
               <div class="block">
                 <el-carousel height="450px">
                   <el-carousel-item v-for="item in pics" :key="item">
@@ -99,10 +99,6 @@ export default {
 .sub-introduction{
   height: 25px;
   margin-bottom: 10px;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
 }
 .el-carousel__item h3 {
   color: #475669;

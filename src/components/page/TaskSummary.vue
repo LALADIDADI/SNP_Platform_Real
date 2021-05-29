@@ -12,7 +12,7 @@
       <div class="introduction-box">
         <el-row :gutter="20">
           <el-col :span="6">
-            <div class="grid-content ">
+            <div>
               <el-row>
                 <el-col :span="10">
                   <div class="content-title">
@@ -28,7 +28,7 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="24">
-            <div class="grid-content ">
+            <div>
               <el-table
                 border
                 :data="tableData"
@@ -324,11 +324,6 @@ export default {
   margin-bottom: 10px;
 }
 
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-}
-
 .el-carousel__item h3 {
   color: #475669;
   font-size: 14px;
@@ -360,11 +355,6 @@ export default {
 
 .bg-purple-light {
   background: #e5e9f2;
-}
-
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
 }
 
 .row-bg {

@@ -21,7 +21,7 @@
               </el-col>
               <el-col :span="10" :push="1">
                 <el-row>
-                  <el-col :span="24"><div class="grid-content ">
+                  <el-col :span="24"><div>
                     <el-alert
                       title="使用GAMETES"
                       type="info"
@@ -32,13 +32,13 @@
                   </div></el-col>
                 </el-row>
                 <el-row>
-                  <el-col :span="24"><div class="grid-content ">
+                  <el-col :span="24"><div>
                     <el-button type="primary" :loading="false" @click="downloadUserManual" >用户手册下载</el-button>
                     <el-button type="primary" :loading="false" @click="downloadGameTes" >源文件下载</el-button>
                   </div></el-col>
                 </el-row>
                 <el-row>
-                  <el-col :span="24"><div class="grid-content ">
+                  <el-col :span="24"><div>
                     <el-alert
                       title="当然，您也可以直接调起程序。"
                       type="info"
@@ -49,7 +49,7 @@
                   </div></el-col>
                 </el-row>
                 <el-row>
-                  <el-col :span="24"><div class="grid-content ">
+                  <el-col :span="24"><div>
                     <el-button type="primary" :loading="false" @click="openGameTes" >调起程序</el-button>
                   </div></el-col>
                 </el-row>
@@ -99,7 +99,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 .el-footer {
   background-color: #B3C0D1;
@@ -160,10 +160,6 @@ export default {
 }
 .bg-purple-light {
   background: #e5e9f2;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
 }
 .row-bg {
   padding: 10px 0;

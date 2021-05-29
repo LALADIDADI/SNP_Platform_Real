@@ -41,7 +41,7 @@
             </el-collapse>
           </el-col>
           <el-col :span="5">
-            <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+            <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px">
               <el-form-item label="threshold:" prop="threshold">
                 <el-input v-model="params.threshold" ></el-input>
               </el-form-item>
@@ -76,7 +76,7 @@
           </el-col>
           <el-col :span="5" >
             <el-row type="flex" justify="left">
-              <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+              <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px">
                 <el-form-item label="alpha:" prop="alpha">
                   <el-input v-model="params.alpha"></el-input>
                 </el-form-item>
@@ -113,7 +113,7 @@
             </el-row>
           </el-col>
           <el-col :span="5">
-            <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+            <el-form :model="params" :rules="rules" ref="ruleForm" label-width="100px" >
               <el-form-item label="kEpiModel:" prop="kEpiModel">
                 <el-input v-model="params.kEpiModel" ></el-input>
               </el-form-item>
@@ -377,10 +377,6 @@ export default {
 
 .introduction-box{
   height: 700px;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
 }
 .el-carousel__item h3 {
   color: #475669;

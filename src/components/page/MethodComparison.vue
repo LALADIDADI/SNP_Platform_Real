@@ -28,7 +28,7 @@
                 <el-radio v-model="radio1" @change="changeChartType" label="2" border>折线图</el-radio>
               </div>
             </el-row>
-            <div class="grid-content bg-purple left-panel">
+            <div class=" bg-purple left-panel">
             <el-row type="flex" justify="center">
               <el-button type="primary" @click="addLength">增加方法</el-button>
               <el-button type="primary" @click="subLength">减少方法</el-button>
@@ -61,9 +61,9 @@
               </div>
             </el-row>
           </div></el-col>
-          <el-col :span="13" :push="1"><div class="grid-content-right bg-purple">
+          <el-col :span="13" :push="1"><div class="bg-purple">
             <div class="schart-box">
-              <div class="content-title"></div>
+              <div></div>
               <schart class="schart" canvasId="bar" :options="options1" ref="chart"></schart>
             </div>
           </div></el-col>
@@ -184,19 +184,7 @@ export default {
 .introduction-box{
   height: 700px;
 }
-.sub-introduction{
-  height: 25px;
-  margin-bottom: 10px;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-  height:265px;
-}
-.grid-content-right {
-  border-radius: 4px;
-  min-height: 36px;
-}
+
 .el-carousel__item h3 {
   color: #475669;
   font-size: 14px;
@@ -206,25 +194,8 @@ export default {
 }
 
 /*页面布局css*/
-.el-col {
-  border-radius: 4px;
-}
-.bg-purple-dark {
-  background: #99a9bf;
-}
 .bg-purple {
   background: #d3dce6;
-}
-.bg-purple-light {
-  background: #e5e9f2;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-}
-.row-bg {
-  padding: 10px 0;
-  background-color: #f9fafc;
 }
 
 /*柱状图相关*/
@@ -236,15 +207,6 @@ export default {
 .schart {
   width: 600px;
   height: 400px;
-}
-
-.content-title {
-  clear: both;
-  font-weight: 400;
-  line-height: 50px;
-  margin: 10px 0;
-  font-size: 22px;
-  color: #1f2f3d;
 }
 
 </style>

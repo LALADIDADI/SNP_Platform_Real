@@ -22,7 +22,7 @@
               </el-alert>
             </el-row>
             <el-row>
-            <div class="grid-content ">
+            <div>
               <el-col :span="6">
                 <el-button type="primary" @click="getData">SNP查询</el-button>
               </el-col>
@@ -42,9 +42,6 @@
             </el-row>
           </el-col>
           <el-col :span="17" :push="1">
-<!--            <iframe :src="url" width="800" height="550" frameborder="1" scrolling="auto" seamless></iframe>-->
-<!--            <div class="grid-content ">-->
-<!--          </div>-->
             <div style="width:800px;height:730px;overflow:hidden;border:0px">
               <div style="width:500px;height:730px;margin:-255px 0px 0px -160px;">
                 <iframe :src="url" width="950" height="730" frameborder="1" scrolling="auto" ></iframe>
@@ -97,10 +94,6 @@ export default {
   height: 25px;
   margin-bottom: 10px;
 }
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-}
 .el-carousel__item h3 {
   color: #475669;
   font-size: 14px;
@@ -128,10 +121,7 @@ export default {
 .bg-purple-light {
   background: #e5e9f2;
 }
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-}
+
 .row-bg {
   padding: 10px 0;
   background-color: #f9fafc;
